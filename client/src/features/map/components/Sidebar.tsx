@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
 import { Context } from "./Provider";
-import Education from "./sections/Education";
-import Transport from "./sections/Transport";
+import Education from "./Education";
+import Transport from "./Transport";
 
 const Sidebar = () => {
   const { state } = useContext(Context)!;

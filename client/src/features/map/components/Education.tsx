@@ -13,12 +13,12 @@ import {
   effectivenessOfLeadershipChanged,
   effectivenessOfSafeguardingChanged,
   schoolEffectivenessChanged,
-} from "../../store";
-import { Context } from "../Provider";
-import Rating from "../Rating";
-import Range from "../Range";
-import Section, { IExpandingProps } from "../Section";
-import GroupComobo from "../GroupCombo";
+} from "../../../store";
+import { Context } from "./Provider";
+import Rating from "../../../components/Rating";
+import Range from "../../../components/Range";
+import Section, { IExpandingProps } from "../../../components/Section";
+import GroupComobo from "../../../components/GroupCombo";
 
 const effectivenessTitles = {
   1: "Outstanding",

@@ -1,7 +1,7 @@
 import React from "react";
-import Provider from "./components/Provider";
-import Sidebar from "./components/Sidebar";
-import Map from "./components/Map";
+import Provider from "./features/map/components/Provider";
+import Sidebar from "./features/map/components/Sidebar";
+import Map from "./features/map/Map";
 
 const App = () => {
   return (

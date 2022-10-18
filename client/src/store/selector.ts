@@ -12,12 +12,6 @@ import { IOfstedSchool, IState, IStation } from "./interfaces";
 // 9 = No Judgement. Pupils achievement is shown under three differing frameworks.
 // Null = No data available.  Some schools are yet to be inspected and so no inspection data are available."
 
-const valOf = (val: number | string | "NULL", overall: number): number => {
-  if ([9, 8, 0, "9", "8", "", "NULL", "SWK", "SM", "0"].includes(val)) {
-    return overall;
-  }
-  return +val;
-};
 const getOfstedGeoJson = (
   ofsted: IOfstedSchool[],
   effectiveness: number,
@@ -42,13 +36,11 @@ const getOfstedGeoJson = (
         effectivenessOfSafeguarding,
       }) =>
         +overall <= effectiveness &&
-        valOf(qualityOfEducation, +overall) <= _qualityOfEducation &&
-        valOf(behaviourAndAttitudes, +overall) <= _behaviourAndAttitudes &&
-        valOf(personalDevelopment, +overall) <= _personalDevelopment &&
-        valOf(effectivenessOfLeadership, +overall) <=
-          _effectivenessOfLeadership &&
-        valOf(effectivenessOfSafeguarding, +overall) <=
-          _effectivenessOfSafeguarding
+        qualityOfEducation <= _qualityOfEducation &&
+        behaviourAndAttitudes <= _behaviourAndAttitudes &&
+        personalDevelopment <= _personalDevelopment &&
+        effectivenessOfLeadership <= _effectivenessOfLeadership &&
+        effectivenessOfSafeguarding <= _effectivenessOfSafeguarding
     )
     .filter(({ age }) => {
       const [lowestAge, highestAge] = age;

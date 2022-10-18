@@ -129,7 +129,6 @@ const processSchools = (postcodes) => {
   });
 }
 
-// use an async main function
 async function main() {
   const pc = await readPostcodes();
   await processSchools(pc);

@@ -7,7 +7,7 @@ import {
   IOfstedSchool,
   IState,
   IAction,
-} from "../store";
+} from "../../../store";
 
 export const Context = React.createContext<{
   state: IState;
@@ -24,7 +24,6 @@ const Provider = (props: IProviderProps) => {
   useEffect(() => {
     fetch("http://localhost:3010/v1/data/ofsted")
       .then((response) => response.json())
-      .then((data: any[]) => data.map((d) => ({...d, age: (d.age as string).split(',').map((n) => +n)})))
       .then((data: IOfstedSchool[]) => dispatch(fetchOfsted(data)));
   }, []);
 

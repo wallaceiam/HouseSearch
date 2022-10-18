@@ -18,3 +18,14 @@ code {
   font-size: 0.5rem;
   line-height: 1rem;
 }
+
+.mapboxgl-popup-content {
+  padding: 0;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: rgb(55, 65, 81);
+}
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  border-bottom-color: rgb(55, 65, 81);
+}

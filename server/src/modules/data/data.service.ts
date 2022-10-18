@@ -30,7 +30,7 @@ export interface IOfstedSchool {
   readonly faithGroup: number;
   readonly postcode: string;
   readonly overallEffectiveness: number;
-  readonly typeOfEducation: string;
+  readonly typeOfEducation: number;
   readonly lat: number;
   readonly long: number;
   readonly idaci: number;
@@ -51,7 +51,60 @@ export interface IOfstedSchool {
  * @returns {Promise<QueryResult>}
  */
 export const queryOfsted = async (_filter: Record<string, any>, _options: IOptions): Promise<IOfstedSchool[]> => {
-  const data = await readCsv<IOfstedSchool>(path.resolve(dir, 'ofsted.csv'), { headers: true });
+  const toNum = (val: string | number, overall: number): number => {
+    if ([9, 8, 0, '9', '8', '', 'NULL', 'SWK', 'SM', '0'].includes(val)) {
+      return overall;
+    }
+    if (val === 'Yes') {
+      return 1;
+    }
+    if (val === 'No') {
+      return 4;
+    }
+    return +val;
+  };
+  const rowProcessor = ({
+    urn,
+    webLink,
+    name,
+    region,
+    faithGroup,
+    postcode,
+    overallEffectiveness,
+    typeOfEducation,
+    lat,
+    long,
+    idaci,
+    totalNumOfPupils,
+    age,
+    catOfConcern,
+    qualityOfEducation,
+    behaviourAndAttitudes,
+    personalDevelopment,
+    effectivenessOfLeadership,
+    effectivenessOfSafeguarding,
+  }: any): IOfstedSchool => ({
+    urn,
+    webLink,
+    name,
+    region,
+    faithGroup: +faithGroup,
+    postcode,
+    overallEffectiveness: +overallEffectiveness,
+    typeOfEducation: +typeOfEducation,
+    lat: +lat,
+    long: +long,
+    idaci: +idaci,
+    totalNumOfPupils: +totalNumOfPupils,
+    age: age.split(',').map((i: string) => +i),
+    catOfConcern,
+    qualityOfEducation: +toNum(qualityOfEducation, +overallEffectiveness),
+    behaviourAndAttitudes: +toNum(behaviourAndAttitudes, +overallEffectiveness),
+    personalDevelopment: +toNum(personalDevelopment, +overallEffectiveness),
+    effectivenessOfLeadership: +toNum(effectivenessOfLeadership, +overallEffectiveness),
+    effectivenessOfSafeguarding: +toNum(effectivenessOfSafeguarding, +overallEffectiveness),
+  });
+  const data = await readCsv<IOfstedSchool>(path.resolve(dir, 'ofsted.csv'), { headers: true }, rowProcessor);
   return data;
 };
 
@@ -70,6 +123,14 @@ export interface IStation {
  * @returns {Promise<QueryResult>}
  */
 export const queryStations = async (_filter: Record<string, any>, _options: IOptions): Promise<IStation[]> => {
-  const data = await readCsv<IStation>(path.resolve(dir, 'transport.csv'), { headers: true });
+  const rowProcessor = ({ station, lat, long, zone, postcode, type }: any): IStation => ({
+    station,
+    lat: +lat,
+    long: +long,
+    zone,
+    postcode,
+    type,
+  });
+  const data = await readCsv<IStation>(path.resolve(dir, 'transport.csv'), { headers: true }, rowProcessor);
   return data;
 };
