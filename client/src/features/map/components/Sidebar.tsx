@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Context } from "./Provider";
+import { MapContext } from "./MapProvider";
 import Education from "./Education";
 import Transport from "./Transport";
 
 const Sidebar = () => {
-  const { state } = useContext(Context)!;
+  const { state } = useContext(MapContext)!;
 
   const [expanded, setExpanded] = useState<string>("");
 
@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <>
       <aside
-        className="group w-16 hover:w-64 z-10 absolute top-3 left-3 overflow-hidden transition ease-in-out duration-300 transform"
+        className="group w-16 hover:w-72 z-10 absolute top-3 left-3 overflow-hidden transition ease-in-out duration-300 transform"
         aria-label="Sidebar"
       >
         <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
@@ -163,7 +163,7 @@ const Sidebar = () => {
               </div>
             </li> */}
             <li>
-              <div className="hidden hidden group-hover:block mt-2 flex items-center justify-between">
+              <div className="hidden group-hover:block mt-2 flex items-center justify-between">
                 <p className="text-xxs italic text-gray-500">
                   Long: {state.long} | Lat: {state.lat} | Zoom: {state.zoom}
                 </p>

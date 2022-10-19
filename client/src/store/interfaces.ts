@@ -17,13 +17,6 @@ export interface IState {
   effectivenessOfSafeguarding: number;
 
   distanceToSchool: number;
-
-  // pos
-  lat: number;
-  long: number;
-  zoom: number;
-
-  mapLoaded: boolean;
 }
 export interface IAction {
   type: string;
@@ -59,10 +52,4 @@ export interface IStation {
   readonly zone: string;
   readonly postcode: string;
   readonly type: string;
-}
-
-export interface IMoveView {
-  readonly lat: number;
-  readonly long: number;
-  readonly zoom: number;
 }

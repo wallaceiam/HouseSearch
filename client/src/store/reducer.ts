@@ -1,6 +1,5 @@
 import {
   IAction,
-  IMoveView,
   IOfstedSchool,
   IState,
   IStation,
@@ -9,8 +8,6 @@ import {
 // actions
 const FETCH_OFSTED = "FETCH_OFSTED";
 const FETCH_STATIONS = "FETCH_STATIONS";
-const MOVE_VIEW = "MOVE_VIEW";
-const MAP_LOADED = "MAP_LOADED";
 const SCHOOL_EFFECTIVENESS_CHANGED = "SCHOOL_EFFECTIVENESS_CHANGED";
 const SCHOOL_DISTANCE_CHANGED = "SCHOOL_DISTANCE_CHANGED";
 const MAX_AGE_CHANGED = "MAX_AGE_CHANGED";
@@ -35,16 +32,6 @@ export const fetchOfsted = (data: IOfstedSchool[]) => ({
 export const fetchStations = (data: IStation[]) => ({
   type: FETCH_STATIONS,
   data,
-});
-
-export const moveView = (data: IMoveView) => ({
-  type: MOVE_VIEW,
-  data,
-});
-
-export const mapLoaded = () => ({
-  type: MAP_LOADED,
-  data: true,
 });
 
 export const schoolEffectivenessChanged = (effectiveness: number) => ({
@@ -118,10 +105,6 @@ export const reducer = (state: IState, { type, data }: IAction): IState => {
         ...state,
         stations: data,
       };
-    case MOVE_VIEW:
-      return { ...state, ...data };
-    case MAP_LOADED:
-      return { ...state, mapLoaded: true };
     case SCHOOL_EFFECTIVENESS_CHANGED:
       return {
         ...state,

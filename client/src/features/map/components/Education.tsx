@@ -2,30 +2,38 @@ import { AcademicCapIcon } from "@heroicons/react/24/outline";
 import { useCallback, useContext } from "react";
 import {
   qualityOfEducationChanged,
-  minAgeChanged,
-  maxAgeChanged,
-  schoolDistanceChanged,
-  FaithGroups,
-  toggleReligion,
+  ageRangeChanged,
+  distanceChanged,
+  religionChanged,
   idaciChanged,
   behaviourAndAttitudesChanged,
   personalDevelopmentChanged,
   effectivenessOfLeadershipChanged,
   effectivenessOfSafeguardingChanged,
-  schoolEffectivenessChanged,
-} from "../../../store";
-import { Context } from "./Provider";
+  ratingChanged,
+} from "../../stores/education";
+import { EducationContext } from "./EducationProvider";
 import Rating from "../../../components/Rating";
 import Range from "../../../components/Range";
 import Section, { IExpandingProps } from "../../../components/Section";
-import GroupComobo from "../../../components/GroupCombo";
+import DropdownWithCheckBoxes from "../../../components/DropdownWithCheckboxes";
+import Dropdown from "../../../components/Dropdown";
 
-const effectivenessTitles = {
+const ratingTitles = {
   1: "Outstanding",
   2: "Good",
   3: "Requires Improvement",
   4: "Inadequate",
 };
+
+const ageRangeTitles = {
+  1: "Nursery (0-4 years)",
+  2: "Primary (4-11 years)",
+  3: "Secondary (11-18 years)",
+  4: "Sixth Form (16-18 years)",
+  5: "All Schools (4-18 years)",
+  6: "All Schools & Nurseries"
+}
 
 const idaciTitles = {
   1: "Least Deprived",
@@ -35,40 +43,41 @@ const idaciTitles = {
   5: "Most Deprived",
 };
 
-const Education = ({ expanded, onToggleExpand }: IExpandingProps) => {
-  const { state, dispatch } = useContext(Context)!;
+const faithGroups = {
+  0: "Non-faith",
+  1: "Christian",
+  2: "Jewish",
+  3: "Muslim",
+  4: "Other faith",
+};
 
-  const setEffectiveness = useCallback(
+const Education = ({ expanded, onToggleExpand }: IExpandingProps) => {
+  const { state, dispatch } = useContext(EducationContext)!;
+
+  const setRating = useCallback(
     (effectiveness: number) => {
-      dispatch(schoolEffectivenessChanged(effectiveness));
+      dispatch(ratingChanged(effectiveness));
     },
     [dispatch]
   );
 
   const setDistanceToSchool = useCallback(
     (distance: number) => {
-      dispatch(schoolDistanceChanged(distance));
+      dispatch(distanceChanged(distance));
     },
     [dispatch]
   );
 
-  const setMinAge = useCallback(
-    (minAge: number) => {
-      dispatch(minAgeChanged(minAge));
-    },
-    [dispatch]
-  );
-
-  const setMaxAge = useCallback(
-    (maxAge: number) => {
-      dispatch(maxAgeChanged(maxAge));
+  const setAgeRange = useCallback(
+    (range: number) => {
+      dispatch(ageRangeChanged(range));
     },
     [dispatch]
   );
 
   const setReligion = useCallback(
     (religionId: number) => {
-      dispatch(toggleReligion(religionId));
+      dispatch(religionChanged(religionId));
     },
     [dispatch]
   );
@@ -124,31 +133,28 @@ const Education = ({ expanded, onToggleExpand }: IExpandingProps) => {
       expanded={expanded}
       onToggleExpand={onToggleExpand}
     >
-      <Rating
-        titles={effectivenessTitles}
-        label="Overall"
-        value={state.effectiveness}
-        setValue={setEffectiveness}
+      <DropdownWithCheckBoxes
+        id="rating"
+        items={ratingTitles}
+        label="Overall Rating"
+        selectedItems={state.rating}
+        onItemSelected={setRating}
       />
-      <Range
-        label="Min Age"
-        value={state.minAge}
-        min={1}
-        max={18}
-        setValue={setMinAge}
-      />
-      <Range
-        label="Max Age"
-        value={state.maxAge}
-        min={1}
-        max={18}
-        setValue={setMaxAge}
-      />
-      <GroupComobo
-        label="Religion"
-        checked={state.religion}
-        items={FaithGroups}
-        setChecked={setReligion}
+
+      <Dropdown
+        id="age"
+        items={ageRangeTitles}
+        label="Age Range"
+        selectedItem={state.ageRange}
+        onItemSelected={setAgeRange}
+        />
+
+      <DropdownWithCheckBoxes
+        id="faith"
+        items={faithGroups}
+        label="Faith"
+        selectedItems={state.religion}
+        onItemSelected={setReligion}
       />
       <Rating
         titles={idaciTitles}
@@ -157,31 +163,31 @@ const Education = ({ expanded, onToggleExpand }: IExpandingProps) => {
         setValue={setIdaci}
       />
       <Rating
-        titles={effectivenessTitles}
+        titles={ratingTitles}
         label="Quality of Education"
         value={state.qualityOfEducation}
         setValue={setQuatityOfEducation}
       />
       <Rating
-        titles={effectivenessTitles}
+        titles={ratingTitles}
         label="Behaviour & Attitudes"
         value={state.behaviourAndAttitudes}
         setValue={setBehaviourAndAttitudes}
       />
       <Rating
-        titles={effectivenessTitles}
+        titles={ratingTitles}
         label="Personal Development"
         value={state.personalDevelopment}
         setValue={setPersonalDevelopment}
       />
       <Rating
-        titles={effectivenessTitles}
+        titles={ratingTitles}
         label="Leadership"
         value={state.effectivenessOfLeadership}
         setValue={setEffectivenessOfLeadership}
       />
       <Rating
-        titles={effectivenessTitles}
+        titles={ratingTitles}
         label="Safeguarding"
         value={state.effectivenessOfSafeguarding}
         setValue={setEffectivenessOfSafefuarding}

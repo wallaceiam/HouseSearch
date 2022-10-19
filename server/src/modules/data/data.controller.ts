@@ -16,7 +16,7 @@ export const getOfsted = catchAsync(async (req: Request, res: Response) => {
   const filter = pick(req.query, ['score']);
   const options: IOptions = pick(req.query, ['sortBy', 'limit', 'page', 'projectBy']);
   const result = await dataService.queryOfsted(filter, options);
-  ofsted = result.filter(({ region }) => region === 'London');
+  ofsted = result; // .filter(({ region }) => region === 'London');
   res.send(ofsted);
 });
 

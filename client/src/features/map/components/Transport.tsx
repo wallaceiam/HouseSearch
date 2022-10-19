@@ -2,11 +2,11 @@ import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import React, { useContext, useCallback } from "react";
 import Section, { IExpandingProps } from "../../../components/Section";
 import Range from "../../../components/Range";
-import { Context } from "./Provider";
+import { EducationContext } from "./EducationProvider";
 import { stationDistanceChanged } from "../../../store";
 
 const Transport = ({ expanded, onToggleExpand }: IExpandingProps) => {
-  const { state, dispatch } = useContext(Context)!;
+  const { state, dispatch } = useContext(EducationContext)!;
 
   const setDistanceToStation = useCallback((distance: number) => {
     dispatch(stationDistanceChanged(distance));

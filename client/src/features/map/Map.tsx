@@ -1,7 +1,9 @@
 import React, { useContext, useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import { Context } from "./components/Provider";
-import { mapLoaded, moveView, useGeoJson } from "../../store";
+import { EducationContext } from "./components/EducationProvider";
+import { MapContext } from "./components/MapProvider";
+import { mapLoaded, moveView } from "../stores/map";
+import { useGeoJson } from "../stores/education";
 import Popup from "./components/SchoolPopup";
 import { createRoot } from "react-dom/client";
 
@@ -9,7 +11,8 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiZm9vZGllc3QiLCJhIjoiY2w5OGVqeDl4MDJleTNzbzZxdnkwYTVsNyJ9.s8lqHyzpt5ymoSmDVlQYwA";
 
 const Map = () => {
-  const { state, dispatch } = useContext(Context)!;
+  const { state: mapState, dispatch: mapDispatch } = useContext(MapContext)!;
+  const { state } = useContext(EducationContext)!;
 
   const mapContainer = useRef(null);
   const popUpRef = useRef(
@@ -20,7 +23,7 @@ const Map = () => {
   );
   const map = useRef<mapboxgl.Map | null>(null);
 
-  const { ofstedGeoJson, stationGeoJson } = useGeoJson(state);
+  const { ofstedGeoJson } = useGeoJson(state);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -28,8 +31,8 @@ const Map = () => {
       container: mapContainer.current!,
       // style: "mapbox://styles/mapbox/streets-v11",
       style: "mapbox://styles/mapbox/light-v10",
-      center: [state.long, state.lat],
-      zoom: state.zoom,
+      center: [mapState.long, mapState.lat],
+      zoom: mapState.zoom,
     });
     const cur = map.current;
     cur.on("load", () => {
@@ -75,11 +78,11 @@ const Map = () => {
             const coordinates = (
               features![0].geometry as any
             ).coordinates.slice();
-            const { name, webLink } = features![0].properties as any;
+            const { ...props } = features![0].properties as any;
 
             const popupNode = document.createElement("div");
             const root = createRoot(popupNode!); // createRoot(container!) if you use TypeScript
-            root.render(<Popup name={name} webLink={webLink} ref={popUpRef.current} />);
+            root.render(<Popup ref={popUpRef.current} {...props} />);
             
 
             // Ensure that if the map is zoomed out such that multiple
@@ -103,7 +106,8 @@ const Map = () => {
         cur.on("mouseleave", "ofsted-symbol", () => {
           cur.getCanvas().style.cursor = "";
         });
-
+        
+        /*
         cur!.addSource("stations", {
           type: "geojson",
           data: {
@@ -168,9 +172,9 @@ const Map = () => {
             },
           },
           "station-name"
-        );
+        );*/
 
-        dispatch(mapLoaded());
+        mapDispatch(mapLoaded());
       });
     });
   });
@@ -179,7 +183,7 @@ const Map = () => {
     const cur = map.current;
     if (cur === null) return; // wait for map to initialize
     cur.on("move", () => {
-      dispatch(
+      mapDispatch(
         moveView({
           long: +cur.getCenter().lng.toFixed(4),
           lat: +cur.getCenter().lat.toFixed(4),
@@ -187,21 +191,21 @@ const Map = () => {
         })
       );
     });
-  }, [map, dispatch]);
+  }, [map, mapDispatch]);
 
   useEffect(() => {
-    if (!state.mapLoaded) return;
+    if (!mapState.hasMapLoaded) return;
     if (map.current === null) return; // wait for map to initialize
     const source = map.current!.getSource("ofsted") as any;
     source?.setData(ofstedGeoJson);
-  }, [map, state.mapLoaded, ofstedGeoJson]);
+  }, [map, mapState.hasMapLoaded, ofstedGeoJson]);
 
-  useEffect(() => {
-    if (!state.mapLoaded) return;
-    if (map.current === null) return; // wait for map to initialize
-    const source = map.current!.getSource("stations") as any;
-    source?.setData(stationGeoJson);
-  }, [map, state.mapLoaded, stationGeoJson]);
+  // useEffect(() => {
+  //   if (!mapState.hasMapLoaded) return;
+  //   if (map.current === null) return; // wait for map to initialize
+  //   const source = map.current!.getSource("stations") as any;
+  //   source?.setData(stationGeoJson);
+  // }, [map, mapState.hasMapLoaded, stationGeoJson]);
 
   return <div ref={mapContainer} className="h-screen" />;
 };

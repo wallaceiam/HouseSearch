@@ -2,28 +2,36 @@ import React from "react";
 import { StarIcon as StarOutlineIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarSolidIcon } from "@heroicons/react/24/solid";
 
+type IconProp = (
+  props: React.ComponentProps<"svg"> & {
+    title?: string;
+    titleId?: string;
+  }
+) => JSX.Element;
 interface IRatingProps {
   label: string;
   value: number;
   titles: ITitles;
   setValue: (rating: number) => void;
+  selectedIcon?: IconProp;
+  unselectedIcon?: IconProp;
 }
 
 interface ITitles {
   [index: number]: string;
 }
 
-const _titles: ITitles = {
-  1: "Outstanding",
-  2: "Good",
-  3: "Requires Improvement",
-  4: "Inadequate",
-};
-
-const Rating = ({ value, setValue, label, titles }: IRatingProps) => {
+const Rating = ({
+  value,
+  setValue,
+  label,
+  titles,
+  selectedIcon: SelectedIcon = StarSolidIcon,
+  unselectedIcon: UnselectedIcon = StarOutlineIcon,
+}: IRatingProps) => {
   return (
     <div className="pt-3">
-       <label
+      <label
         htmlFor="rating"
         className="flex mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
       >
@@ -33,18 +41,19 @@ const Rating = ({ value, setValue, label, titles }: IRatingProps) => {
         </span>
       </label>
       <div className="flex item-center">
-        {Object.keys(titles).map(i => +i)
+        {Object.keys(titles)
+          .map((i) => +i)
           .reverse()
           .map((i) =>
             value <= i ? (
-              <StarSolidIcon
+              <SelectedIcon
                 key={i}
                 className="w-5 h-5 text-gray-400 cursor-pointer"
                 title={titles[i]}
                 onClick={() => setValue(i)}
               />
             ) : (
-              <StarOutlineIcon
+              <UnselectedIcon
                 key={i}
                 className="w-5 h-5 text-gray-400 cursor-pointer"
                 title={titles[i]}

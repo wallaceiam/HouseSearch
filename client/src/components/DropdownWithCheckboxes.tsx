@@ -4,24 +4,26 @@ import { useOutsideAlerter } from "../hooks";
 import Label from "./Label";
 
 interface DropdownItems {
-  readonly [value: string]: string;
+  readonly [value: number]: string;
 }
 
 interface DropdownWithCheckBoxesProps {
+  readonly id: string;
   readonly label?: string;
   readonly items: DropdownItems;
-  readonly selectedItems: string[];
-  readonly onItemSelected: (value: string) => void;
+  readonly selectedItems: number[];
+  readonly onItemSelected: (value: number) => void;
   readonly noneSelectedText?: string;
   readonly allSelectedText?: string;
   readonly disabled?: boolean;
 }
 const DropdownWithCheckBoxes = ({
+  id,
   label,
   items = {},
   selectedItems = [],
   onItemSelected,
-  noneSelectedText = "None",
+  noneSelectedText = "Select",
   allSelectedText = "All",
   disabled = false,
 }: DropdownWithCheckBoxesProps) => {
@@ -37,7 +39,7 @@ const DropdownWithCheckBoxes = ({
   const onCheckToggle = useCallback(
     (event: any) => {
       if (!disabled) {
-        onItemSelected(event.target.value);
+        onItemSelected(+event.target.value);
       }
     },
     [disabled, onItemSelected]
@@ -51,8 +53,8 @@ const DropdownWithCheckBoxes = ({
       return allSelectedText;
     }
     return Object.keys(items)
-      .filter((i) => selectedItems.includes(i))
-      .map((i) => items[i])
+      .filter((i) => selectedItems.includes(+i))
+      .map((i) => items[+i])
       .join(", ");
   }, [items, selectedItems, noneSelectedText, allSelectedText]);
 
@@ -67,11 +69,11 @@ const DropdownWithCheckBoxes = ({
   }, [disabled]);
 
   return (
-    <div ref={ref}>
-      {label && <Label label={label} htmlFor={"dropdownCheckboxButton"} />}
+    <div ref={ref} className={"relative mt-3"}>
+      {label && <Label label={label} htmlFor={id} />}
       <button
         disabled={disabled}
-        id="dropdownCheckboxButton"
+        id={id}
         className={classes}
         type="button"
         onClick={onClick}
@@ -91,10 +93,10 @@ const DropdownWithCheckBoxes = ({
       </button>
 
       <div
-        id="dropdownDefaultCheckbox"
+        id={`${id}-dropdown`}
         className={`${
           isOpen ? "" : "hidden"
-        } z-10 mt-2 max-h-60 max-w-72 w-48 bg-white overflow-y-auto rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
+        } absolute z-10 mt-2 max-h-60 max-w-72 w-48 bg-white overflow-y-auto rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600`}
         // style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 402px, 0px);"
       >
         {Object.keys(items).length > 0 && (
@@ -104,18 +106,18 @@ const DropdownWithCheckBoxes = ({
                 <div className="flex items-center">
                   <input
                     disabled={disabled}
-                    id={`checkbox-item-${value}-${i}`}
+                    id={`${id}-checkbox-item-${value}-${i}`}
                     type="checkbox"
                     value={value}
-                    checked={selectedItems.includes(value)}
+                    checked={selectedItems.includes(+value)}
                     onChange={onCheckToggle}
                     className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <label
-                    htmlFor={`checkbox-item-${value}-${i}`}
-                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    htmlFor={`${id}-checkbox-item-${value}-${i}`}
+                    className="ml-2 text-sm whitespace-nowrap font-medium text-gray-900 dark:text-gray-300"
                   >
-                    {items[value]}
+                    {items[+value]}
                   </label>
                 </div>
               </li>

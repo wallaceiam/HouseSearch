@@ -19,11 +19,6 @@ export const defaultValue: IState = {
   distanceToStation: 0.6,
   distanceToSchool: 0.6,
 
-  long: -0.1276,
-  lat: 51.5072,
-  zoom: 9.5,
-
-  mapLoaded: false,
 };
 
 export const CategoryOfConcerns = ["SWK", "SM"];
