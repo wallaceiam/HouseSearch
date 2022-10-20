@@ -1,0 +1,12 @@
+{
+  "name": "ods",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.18.12/xlsx-0.18.12.tgz"
+  }
+}

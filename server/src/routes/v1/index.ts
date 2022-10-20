@@ -3,6 +3,7 @@ import authRoute from './auth.route';
 import docsRoute from './swagger.route';
 import userRoute from './user.route';
 import dataRoute from './data.route';
+import ofstedRoute from './ofsted.route';
 import mapRoute from './map.route';
 import config from '../../config/config';
 
@@ -25,6 +26,10 @@ const defaultIRoute: IRoute[] = [
   {
     path: '/data',
     route: dataRoute,
+  },
+  {
+    path: '/ofsted',
+    route: ofstedRoute,
   },
   {
     path: '/map',
