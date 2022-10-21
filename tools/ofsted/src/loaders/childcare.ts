@@ -3,16 +3,20 @@ import path from "path";
 import {
   blankOrUndefined,
   telephone,
-  localAuthority,
+  localAuthority as localAuthorityParser,
   gender,
   town,
+  getId,
+  date,
+  rating,
 } from "../utils";
 import { parser } from "../parser";
-import { IPostcodeLookup, ISchool } from "../types";
+import { ILocalAuthority, IPostcodeLookup, ISchool } from "../types";
 
 export const getChildcareInformation = async (
   dir: string,
-  postcodes: IPostcodeLookup
+  postcodes: IPostcodeLookup,
+  localAuthorities: ILocalAuthority[],
 ) => {
   const fileName = path.resolve(
     dir,
@@ -27,21 +31,33 @@ export const getChildcareInformation = async (
       return undefined;
     }
 
-    const pc = postcodes[row["Postcode"]];
+    const postcode = row["Postcode"].toUpperCase();
+    const pc = postcodes[postcode];
     if (pc === undefined) {
-      if (row["Postcode"].length > 0) {
+      if (postcode.length > 0) {
         console.warn(
-          `POSTCODE: ${row["Postcode"]} not found for ${row["Provider name"]}`
+          `POSTCODE: ${postcode} not found for ${row["Provider name"]}`
         );
       }
       return undefined;
     }
 
-    // http://www.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/CARE/EY101465
+    const id = getId({ urn: row['Provider URN'], localAuthorityId: -1, postcode});
+
+    const localAuthortiy = localAuthorityParser(row["Local authority"]);
+    const localAuthorityId = localAuthorities.find((la) => la.localAuthority === localAuthortiy ||
+      (la.localAuthority === 'County Durham' &&  localAuthortiy === 'Durham'))?.localAuthorityId ?? -1;
+    if(localAuthorityId < 0) {
+      console.warn(`LA not found for ${localAuthortiy}`);
+    }
+
     const school: ISchool = {
+      id,
+      // http://www.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/CARE/EY101465
       webLink: `/CARE/${row["Provider URN"]}`,
       urn: row["Provider URN"],
-      localAuthorityId: -1,
+      localAuthorityId,
+      localAuthority: localAuthortiy,
       minorGroup: row["Provider type"],
       schoolType: row["Provider subtype"],
       isOpen: row["Provider status"] === "Active",
@@ -62,20 +78,19 @@ export const getChildcareInformation = async (
       address2: blankOrUndefined(row["Provider address line 2"]),
       address3: blankOrUndefined(row["Provider address line 3"]),
       town: town(row["Provider town"]),
-      postcode: row["Postcode"].toUpperCase(),
+      postcode,
       lat: pc.lat,
       long: pc.long,
       telephone: telephone(row["Telephone Number"]),
 
       // 'Parliamentary constituency',
-      localAuthortiy: localAuthority(row["Local authority"]),
       ageLow: undefined,
       ageHigh: undefined,
       gender: gender("MIXED"),
       religiousCharacter: undefined,
       adminPolicy: undefined,
-      ofstedRating: 0,
-      dateOfLastInspection: undefined,
+      ofstedRating: rating(row['ost recent full: Overall effectiveness']),
+      dateOfLastInspection: date(row['Most recent full: Inspection date']),
     };
 
     return school;

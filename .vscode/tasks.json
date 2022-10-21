@@ -9,6 +9,15 @@
 			"problemMatcher": [],
 			"label": "ofsted:yarn:compile",
 			"detail": "tsc --build"
+		},
+		{
+			"type": "npm",
+			"script": "compile",
+			"path": "server",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "server:yarn:compile",
+			"detail": "tsc --build"
 		}
 	]
 }

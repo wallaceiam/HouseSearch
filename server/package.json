@@ -6,7 +6,6 @@
   "repository": "https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate.git",
   "author": "wafula saisi <waflinus96@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "engines": {
     "node": ">=14.0.0"
   },
@@ -116,6 +115,7 @@
     "express-rate-limit": "^5.5.1",
     "helmet": "^4.6.0",
     "http-status": "^1.5.0",
+    "ioredis": "^5.2.3",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",

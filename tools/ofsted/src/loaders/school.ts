@@ -1,6 +1,14 @@
 import path from "path";
 
-import { blankOrUndefined, localAuthority, gender, date, town } from "../utils";
+import {
+  blankOrUndefined,
+  localAuthority as localAuthorityParser,
+  gender,
+  date,
+  town,
+  getId,
+  rating,
+} from "../utils";
 import { parser } from "../parser";
 import { IPostcodeLookup, ISchool } from "../types";
 
@@ -16,30 +24,38 @@ export const getSchoolInformation = async (
   );
 
   const transformer = (row: any): ISchool | undefined => {
-    if(row['URN'] === "") {
+    if (row["URN"] === "") {
       return undefined;
     }
-    const pc = postcodes[row["POSTCODE"].toUpperCase()];
+    const postcode = row["POSTCODE"].toUpperCase();
+    const pc = postcodes[postcode];
     if (pc === undefined) {
-      if (row["POSTCODE"].length > 0) {
+      if (postcode.length > 0) {
         console.warn(
-          `POSTCODE: ${row["POSTCODE"]} not found for ${row["SCHNAME"]}`
+          `POSTCODE: ${postcode} not found for ${row["SCHNAME"]}`
         );
       }
       return undefined;
     }
 
+    const id = getId({
+      urn: row["URN"],
+      localAuthorityId: +row["LA"],
+      postcode: postcode,
+    });
+
     const school: ISchool = {
+      id,
       webLink: `/ELS/${row["URN"]}`,
       urn: row["URN"],
-      localAuthorityId: +row['LA'],
-      localAuthortiy: localAuthority(row["LANAME"]),
+      localAuthorityId: +row["LA"],
+      localAuthority: localAuthorityParser(row["LANAME"]),
       name: row["SCHNAME"],
       address: row["STREET"],
       address2: blankOrUndefined(row["LOCALITY"]),
       address3: blankOrUndefined(row["ADDRESS3"]),
       town: town(row["TOWN"]),
-      postcode: row["POSTCODE"].toUpperCase(),
+      postcode,
       telephone: undefined,
       lat: pc.lat,
       long: pc.long,
@@ -58,7 +74,7 @@ export const getSchoolInformation = async (
       gender: gender(row["GENDER"]),
       religiousCharacter: row["RELCHAR"],
       adminPolicy: row["ADMPOL"],
-      ofstedRating: row["OFSTEDRATING"],
+      ofstedRating: rating(row["OFSTEDRATING"]),
       dateOfLastInspection: date(row["OFSTEDLASTINSP"]),
     };
     return school;

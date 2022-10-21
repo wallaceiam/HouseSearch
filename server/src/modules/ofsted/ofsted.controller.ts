@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import catchAsync from '../utils/catchAsync';
-import pick from '../utils/pick';
-import { IOptions } from '../paginate/paginate';
+import { IShoolSummary } from './ofsted.models';
 import * as dataService from './ofsted.service';
-import { IOfstedSchool } from './ofsted.service';
 
-let ofsted: ISchool[] | undefined;
+let ofsted: IShoolSummary[] | undefined;
 
 export const getOfsted = catchAsync(async (_req: Request, res: Response) => {
   if (ofsted) {
@@ -13,6 +11,7 @@ export const getOfsted = catchAsync(async (_req: Request, res: Response) => {
     return;
   }
   const result = await dataService.queryOfsted();
-  ofsted = result; // .filter(({ region }) => region === 'London');
+
+  ofsted = result;
   res.send(ofsted);
 });

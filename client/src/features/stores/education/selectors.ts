@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IEducationState } from "./types";
+import { IEducationState, ISchoolSummary } from "./types";
 
 const filterAgeRange = (ageRangeId: number, [lowest, highest]: number[]): boolean => {
   switch(ageRangeId) {
@@ -32,6 +32,9 @@ const filterAgeRange = (ageRangeId: number, [lowest, highest]: number[]): boolea
 // 9 = No Judgement. Pupils achievement is shown under three differing frameworks.
 // Null = No data available.  Some schools are yet to be inspected and so no inspection data are available."
 
+const educationFilter = (ratingFilter: number[], ageRangeFilter: number) => {
+  return ({rating}: ISchoolSummary) => ratingFilter.includes(rating);
+}
 const getOfstedGeoJson = ({
   ofsted = [],
   rating,
@@ -40,16 +43,17 @@ const getOfstedGeoJson = ({
   idaci: _idaci
 }: IEducationState) => {
   const features = ofsted
-    .filter(
-      ({ overallEffectiveness: overall }) => rating.includes(overall)
-    )
-    .filter(({ age }) => filterAgeRange(ageRange, age))
-    // .filter(({ age }) => {
-    //   const [lowestAge, highestAge] = age;
-    //   return minAge <= lowestAge && maxAge >= highestAge;
-    // })
-    .filter(({ faithGroup }) => religion.includes(faithGroup))
-    .filter(({ idaci }) => +idaci <= _idaci);
+    .filter(educationFilter(rating, ageRange))
+    // .filter(
+    //   ({ overallEffectiveness: overall }) => rating.includes(overall)
+    // )
+    // .filter(({ age }) => filterAgeRange(ageRange, age))
+    // // .filter(({ age }) => {
+    // //   const [lowestAge, highestAge] = age;
+    // //   return minAge <= lowestAge && maxAge >= highestAge;
+    // // })
+    // .filter(({ faithGroup }) => religion.includes(faithGroup))
+    // .filter(({ idaci }) => +idaci <= _idaci);
 
   const result = {
     type: "FeatureCollection",

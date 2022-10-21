@@ -1,4 +1,4 @@
-import { IOfstedSchool } from "./types";
+import { ISchoolSummary } from "./types";
 
 export const OFSTED_DATA_FETCHED = "OFSTED_DATA_FETCHED";
 export const RATING_CHANGED = "RATING_CHANGED";
@@ -15,7 +15,7 @@ export const EFFECTIVENESS_OF_LEADERSHIP_CHANGED =
 export const EFFECTIVENESS_OF_SAFEGUARDING_CHNAGED =
   "EFFECTIVENESS_OF_SAFEGUARDING_CHNAGED";
 
-export const ofstedDataFetched = (data: IOfstedSchool[]) => ({
+export const ofstedDataFetched = (data: ISchoolSummary[]) => ({
   type: OFSTED_DATA_FETCHED,
   data,
 });

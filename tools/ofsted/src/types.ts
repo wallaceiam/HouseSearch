@@ -11,6 +11,11 @@ export interface IPostcodeLookup {
   };
 }
 
+export interface ILocalAuthority {
+  readonly localAuthorityId: number, 
+  readonly localAuthority: string
+};
+
 export interface IUnique<T> {
   readonly urn: string;
   readonly localAuthorityId: number;
@@ -133,10 +138,11 @@ export interface IKeyStage5 extends IUnique<IKeyStage5Data> {
 }
 
 export interface ISchool {
+  readonly id: string;
   readonly webLink: string;
   readonly urn: string;
   readonly localAuthorityId: number;
-  readonly localAuthortiy: string;
+  readonly localAuthority: string;
 
   readonly name: string;
   readonly address: string;
@@ -161,7 +167,7 @@ export interface ISchool {
 
   readonly ageLow: number | undefined;
   readonly ageHigh: number | undefined;
-  readonly gender: string;
+  readonly gender: number;
 
   readonly religiousCharacter: string | undefined;
   readonly adminPolicy: string | undefined;

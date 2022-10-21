@@ -56,9 +56,21 @@ const Map = () => {
             "icon-size": 0.5,
             // "text-field": ["get", "name"],
           },
-          // paint: {
-          //   "text-opacity": 0.4,
-          // },
+          paint: {
+            "icon-color": [
+              "match", // Use the 'match' expression: https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-match
+              ["get", "rating"], 
+              1,
+              "#4ade80",
+              2,
+              "#facc15",
+              3,
+              "#374151",
+              4,
+              "#f87171",
+              "#000000",
+            ]
+          },
         });
 
         cur.on(
@@ -78,11 +90,11 @@ const Map = () => {
             const coordinates = (
               features![0].geometry as any
             ).coordinates.slice();
-            const { ...props } = features![0].properties as any;
+            const school = features![0].properties as any;
 
             const popupNode = document.createElement("div");
             const root = createRoot(popupNode!); // createRoot(container!) if you use TypeScript
-            root.render(<Popup ref={popUpRef.current} {...props} />);
+            root.render(<Popup ref={popUpRef.current} school={school} />);
             
 
             // Ensure that if the map is zoomed out such that multiple

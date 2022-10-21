@@ -16,6 +16,27 @@
         "<node_internals>/**"
       ],
       "program": "./dist/index.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Server",
+      "cwd": "${workspaceFolder}/server",
+      "outputCapture": "std",
+      "sourceMaps": true,
+      "preLaunchTask": "server:yarn:compile",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "./dist/index.js",
+      "args": [
+        "--experimental-modules",
+        "--es-module-specifier-resolution=node"
+      ],
+      "env": {
+        "NODE_ENV": "development"
+      }
     }
+
   ]
 }

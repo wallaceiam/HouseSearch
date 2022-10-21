@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
+
 import {
   getPostcodeLookup,
   getChildcareInformation,
@@ -7,10 +8,12 @@ import {
   getCensus,
   getFinancials,
   getTeacherInformation,
+  getLocalAuthorities,
 } from "./loaders";
 
 import { ISchool } from "./types";
 import { merge } from "./merge";
+import { saveSchools } from "./utils";
 
 const save = async (dir: string, schools: ISchool[]) =>
   new Promise<void>((resolve) => {
@@ -27,9 +30,11 @@ const save = async (dir: string, schools: ISchool[]) =>
 async function main() {
   const dir = path.resolve(__dirname, "..", "..", "..", "data");
 
+  const localAuthorities = await getLocalAuthorities(dir);
+
   const postcodes = await getPostcodeLookup(dir);
 
-  const childcare = await getChildcareInformation(dir, postcodes);
+  const childcare = await getChildcareInformation(dir, postcodes, localAuthorities);
   const schools = await getSchoolInformation(dir, postcodes);
   const census = await getCensus(dir);
   const financials = await getFinancials(dir);
@@ -38,7 +43,7 @@ async function main() {
   const merged = merge(childcare, schools, census, financials, teachers);
 
   const all = [...merged.filter(({ isOpen }) => isOpen)];
-  all.reduce((prev, { urn, localAuthortiy }) => {
+  all.reduce((prev, { urn, localAuthority: localAuthortiy }) => {
     const key = `${urn}-${localAuthortiy}`;
     if (prev.includes(key)) {
       console.warn(`DUPLICATE URN DETECTED: ${urn} in ${localAuthortiy}`);
@@ -56,6 +61,8 @@ async function main() {
   // printUnique(allValues);
 
   await save(dir, all);
+
+  await saveSchools(all);
 }
 
 main();

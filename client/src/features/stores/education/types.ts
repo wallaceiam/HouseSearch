@@ -1,5 +1,5 @@
 export interface IEducationState {
-  ofsted?: IOfstedSchool[];
+  ofsted?: ISchoolSummary[];
 
   // filters
   rating: number[];
@@ -21,24 +21,20 @@ export interface IAction {
   data: any;
 }
 
-export interface IOfstedSchool {
-  readonly urn: string;
+export interface ISchoolSummary {
+  readonly id: string;
   readonly webLink: string;
+  readonly urn: string;
   readonly name: string;
-  readonly region: string;
-  readonly faithGroup: number;
-  readonly postcode: string;
-  readonly overallEffectiveness: number;
-  readonly typeOfEducation: string;
+  readonly address: string;
+  readonly telephone: string | undefined;
   readonly lat: number;
   readonly long: number;
-  readonly idaci: number;
-  readonly totalNumOfPupils: number;
-  readonly age: [number, number];
-  readonly catOfConcern: string;
-  readonly qualityOfEducation: number;
-  readonly behaviourAndAttitudes: number;
-  readonly personalDevelopment: number;
-  readonly effectivenessOfLeadership: number;
-  readonly effectivenessOfSafeguarding: number;
+  readonly rating: number;
+  readonly localAuthority: string;
+  readonly gender: number;
+  readonly minorGroup: string;
+  readonly schoolType: string;
+  readonly isTypeFlag: number;
+  readonly lastInspDate: Date | undefined;
 }

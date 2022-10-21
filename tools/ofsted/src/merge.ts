@@ -42,9 +42,9 @@ const diff = <T>(left: ILeft[], right: IUnique<T>[]) => {
     `  Matched ${matched2.length}\tUnmatched L: ${onlyLeft2.length}\tUnmatched R: ${onlyRight2.length}`
   );
 
-  if(onlyRight2.length > 0) {
-    console.table(onlyRight2.slice(0, 10));
-  }
+  // if(onlyRight2.length > 0) {
+  //   console.table(onlyRight2.slice(0, 10));
+  // }
 };
 
 export const merge = (
