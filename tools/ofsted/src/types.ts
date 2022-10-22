@@ -174,4 +174,11 @@ export interface ISchool {
 
   readonly ofstedRating: 1 | 2 | 3 | 4 | 0;
   readonly dateOfLastInspection: Date | undefined;
+
+  readonly census: ICensusData | undefined;
+  readonly financials: IFinancialData | undefined;
+  readonly teachers: ITeacherData | undefined;
+  readonly keyStage4: IKeyStage4Data | undefined;
+  readonly keyStage5: IKeyStage5Data | undefined;
 }
+

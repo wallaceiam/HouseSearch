@@ -91,6 +91,12 @@ export const getChildcareInformation = async (
       adminPolicy: undefined,
       ofstedRating: rating(row['ost recent full: Overall effectiveness']),
       dateOfLastInspection: date(row['Most recent full: Inspection date']),
+
+      census: undefined,
+      financials: undefined,
+      teachers: undefined,
+      keyStage4: undefined,
+      keyStage5: undefined
     };
 
     return school;

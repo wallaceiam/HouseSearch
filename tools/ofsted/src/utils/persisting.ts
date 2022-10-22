@@ -41,73 +41,77 @@ const flag = (
   (isPost16 ? 8 : 0);
 
 export const saveSchools = async (schools: ISchool[]) => {
-
-  console.log('Saving schools to redis...');
+  console.log("Saving schools to redis...");
   const redis = new Redis();
   const pipeline = await redis.pipeline();
 
+  pipeline.del(indexKey);
+  pipeline.del("school.geoindex");
+
   const step = schools.length / 100;
-  schools.forEach(
-    (school, index) => {
-      const {
-        id,
-        ofstedRating,
-        webLink,
-        urn,
-        name,
-        localAuthority,
-        address,
-        address2,
-        address3,
-        town,
-        postcode,
-        telephone,
-        lat,
-        long,
-        gender,
-        minorGroup,
-        schoolType,
-        isNursery,
-        isPrimary,
-        isSecondary,
-        isPost16,
-        dateOfLastInspection,
-      } = school;
+  schools.forEach((school, index) => {
+    const {
+      id,
+      ofstedRating,
+      webLink,
+      urn,
+      name,
+      localAuthority,
+      address,
+      address2,
+      address3,
+      town,
+      postcode,
+      telephone,
+      lat,
+      long,
+      gender,
+      minorGroup,
+      schoolType,
+      isNursery,
+      isPrimary,
+      isSecondary,
+      isPost16,
+      dateOfLastInspection,
+    } = school;
 
-      const summary: IShoolSummary = {
-        id,
-        webLink,
-        urn,
-        name,
-        localAuthority,
-        address: combine(address, address2, address3, town, postcode),
-        telephone,
-        lat,
-        long,
-        gender,
-        minorGroup,
-        schoolType,
-        isTypeFlag: flag(isNursery, isPrimary, isSecondary, isPost16),
-        rating: ofstedRating,
-        lastInspDate: dateOfLastInspection
-      };
+    const summary: IShoolSummary = {
+      id,
+      webLink,
+      urn,
+      name,
+      localAuthority,
+      address: combine(address, address2, address3, town, postcode),
+      telephone,
+      lat,
+      long,
+      gender,
+      minorGroup,
+      schoolType,
+      isTypeFlag: flag(isNursery, isPrimary, isSecondary, isPost16),
+      rating: ofstedRating,
+      lastInspDate: dateOfLastInspection,
+    };
 
-      pipeline.hmset(`${valueKeyPrefix}${id}`, summary);
+    pipeline.del(`${valueKeyPrefix}${id}`);
+    pipeline.hmset(`${valueKeyPrefix}${id}`, summary);
 
-      pipeline.del(`school-simple:${id}`)
-      pipeline.hmset(`${fullValueKeyPrefx}${id}`, school);
+    pipeline.del(`school-simple:${id}`);
+    pipeline.del(`${fullValueKeyPrefx}${id}`);
+    pipeline.hmset(`${fullValueKeyPrefx}${id}`, school);
 
-      pipeline.zadd(indexKey, ofstedRating, id);
+    pipeline.zadd(indexKey, ofstedRating, id);
 
-      if(index % step === 0) {
-        console.log(((index / schools.length) * 100).toFixed(2));
-      }
+    pipeline.geoadd("school.geoindex", long, lat, id);
+
+    if (index % step === 0) {
+      console.log(((index / schools.length) * 100).toFixed(2));
     }
-  );
+  });
 
-  console.log('Executing...');
+  console.log("Executing...");
   await pipeline.exec();
 
   redis.disconnect();
-  console.log('Schools saved.');
+  console.log("Schools saved.");
 };

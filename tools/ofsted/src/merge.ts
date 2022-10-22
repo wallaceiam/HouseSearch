@@ -53,7 +53,7 @@ export const merge = (
   census: ICensus[],
   financials: IFinancials[],
   teachers: ITeacher[]
-) => {
+): ISchool[] => {
   const all = [...childcare, ...schools];
   console.log(`All schools : ${all.length}`);
   console.log(`Census      : ${census.length}`);
@@ -62,5 +62,24 @@ export const merge = (
   diff(all, financials);
   console.log(`Teachers    : ${teachers.length}`);
   diff(all, teachers);
-  return all;
+  return all.map((school) => {
+    const censusData = census.find(
+      (c) =>
+        c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
+    );
+    const financialData = financials.find(
+      (c) =>
+        c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
+    );
+    const teacherData = teachers.find(
+      (c) =>
+        c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
+    );
+    return {
+      ...school,
+      census: censusData?.data,
+      financials: financialData?.data,
+      teachers: teacherData?.data
+    };
+  });
 };

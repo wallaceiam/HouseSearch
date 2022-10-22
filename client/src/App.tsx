@@ -1,9 +1,9 @@
 import React from "react";
-import MapFeature from "./features/map";
+import Pages from "./pages";
 
 const App = () => {
   return (
-    <MapFeature />
+    <Pages />
   );
 };
 

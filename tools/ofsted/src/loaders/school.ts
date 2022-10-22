@@ -76,6 +76,12 @@ export const getSchoolInformation = async (
       adminPolicy: row["ADMPOL"],
       ofstedRating: rating(row["OFSTEDRATING"]),
       dateOfLastInspection: date(row["OFSTEDLASTINSP"]),
+      
+      census: undefined,
+      financials: undefined,
+      teachers: undefined,
+      keyStage4: undefined,
+      keyStage5: undefined
     };
     return school;
   };

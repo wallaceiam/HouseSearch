@@ -4,7 +4,13 @@ import { ofstedController, ofstedValidation } from '../../modules/ofsted';
 
 const router: Router = express.Router();
 
-router.route('/').get(validate(ofstedValidation.getOfsted), ofstedController.getOfsted);
+router
+  .route('/')
+  .get(validate(ofstedValidation.getSummaries), ofstedController.getSummaries);
+
+router
+  .route('/:ofstedId')
+  .get(validate(ofstedValidation.getOfsted), ofstedController.getOfsted);
 
 export default router;
 

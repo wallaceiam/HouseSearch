@@ -13,7 +13,7 @@ const modifier = (value: any): IShoolSummary => {
   }
 };
 
-export const queryOfsted = async (): Promise<IShoolSummary[]> => {
+export const querySummaries = async (): Promise<IShoolSummary[]> => {
   const redis = useRedis();
 
   const schools = await getSortedSetWithValues<IShoolSummary>({
@@ -25,3 +25,17 @@ export const queryOfsted = async (): Promise<IShoolSummary[]> => {
 
   return schools ?? [];
 };
+
+/**
+ * Get user by id
+ * @param {string} id
+ * @returns {Promise<ISchool | null>}
+ */
+ export const getSchoolById = async (id: string): Promise<any | null> => {
+  const redis = useRedis();
+
+  const school = await redis.hgetall(`school:${id}`);
+
+  return school as any;
+
+ }

@@ -30,16 +30,24 @@ const save = async (dir: string, schools: ISchool[]) =>
 async function main() {
   const dir = path.resolve(__dirname, "..", "..", "..", "data");
 
+  console.log('Getting local authorites...');
   const localAuthorities = await getLocalAuthorities(dir);
 
+  console.log('Getting postcodes...');
   const postcodes = await getPostcodeLookup(dir);
 
+  console.log('Getting childcare...');
   const childcare = await getChildcareInformation(dir, postcodes, localAuthorities);
+  console.log('Getting schools...');
   const schools = await getSchoolInformation(dir, postcodes);
+  console.log('Getting census...');
   const census = await getCensus(dir);
+  console.log('Getting financials...');
   const financials = await getFinancials(dir);
+  console.log('Getting teachers...');
   const teachers = await getTeacherInformation(dir);
 
+  console.log('Merging...');
   const merged = merge(childcare, schools, census, financials, teachers);
 
   const all = [...merged.filter(({ isOpen }) => isOpen)];
@@ -53,7 +61,7 @@ async function main() {
     return prev;
   }, new Array<string>());
 
-  
+  console.log('Saving...');
 
   // const allValues = all.map(
   //   ({ religiousCharacter }) => religiousCharacter ?? ""
