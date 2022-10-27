@@ -5,3 +5,4 @@ export * from "./census";
 export * from "./financials";
 export * from "./teacher";
 export * from "./localAuthority";
+export * from "./schoolType";

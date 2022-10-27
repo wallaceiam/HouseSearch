@@ -10,3 +10,10 @@ Use tools/postcode to create data/postcodes.csv
 
 ## Childcare & Nurseries
 
+
+
+## Schools
+
+## Establishment Data
+
+https://get-information-schools.service.gov.uk/Downloads

@@ -1,3 +1,2 @@
-import useOutsideAlerter from "./outsideAlerter";
-
-export { useOutsideAlerter };
+export * from './d3';
+export * from './outsideAlerter';

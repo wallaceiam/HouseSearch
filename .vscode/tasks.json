@@ -13,7 +13,7 @@
 		{
 			"type": "npm",
 			"script": "compile",
-			"path": "server",
+			"path": "apps/server",
 			"group": "build",
 			"problemMatcher": [],
 			"label": "server:yarn:compile",

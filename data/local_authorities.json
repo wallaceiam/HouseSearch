@@ -1,0 +1,634 @@
+[
+  {
+    "slug": "city-of-london",
+    "id": 201
+  },
+  {
+    "slug": "camden",
+    "id": 202
+  },
+  {
+    "slug": "greenwich",
+    "id": 203
+  },
+  {
+    "slug": "lewisham",
+    "id": 209
+  },
+  {
+    "slug": "hackney",
+    "id": 204
+  },
+  {
+    "slug": "tower-hamlets",
+    "id": 211
+  },
+  {
+    "slug": "hammersmith-and-fulham",
+    "id": 205
+  },
+  {
+    "slug": "islington",
+    "id": 206
+  },
+  {
+    "slug": "kensington-and-chelsea",
+    "id": 207
+  },
+  {
+    "slug": "hounslow",
+    "id": 313
+  },
+  {
+    "slug": "surrey",
+    "id": 936
+  },
+  {
+    "slug": "lambeth",
+    "id": 208
+  },
+  {
+    "slug": "wandsworth",
+    "id": 212
+  },
+  {
+    "slug": "westminster",
+    "id": 213
+  },
+  {
+    "slug": "southwark",
+    "id": 210
+  },
+  {
+    "slug": "merton",
+    "id": 315
+  },
+  {
+    "slug": "barking-and-dagenham",
+    "id": 301
+  },
+  {
+    "slug": "barnet",
+    "id": 302
+  },
+  {
+    "slug": "bexley",
+    "id": 303
+  },
+  {
+    "slug": "bradford",
+    "id": 380
+  },
+  {
+    "slug": "brent",
+    "id": 304
+  },
+  {
+    "slug": "harrow",
+    "id": 310
+  },
+  {
+    "slug": "ealing",
+    "id": 307
+  },
+  {
+    "slug": "bromley",
+    "id": 305
+  },
+  {
+    "slug": "croydon",
+    "id": 306
+  },
+  {
+    "slug": "haringey",
+    "id": 309
+  },
+  {
+    "slug": "enfield",
+    "id": 308
+  },
+  {
+    "slug": "hertfordshire",
+    "id": 919
+  },
+  {
+    "slug": "havering",
+    "id": 311
+  },
+  {
+    "slug": "hillingdon",
+    "id": 312
+  },
+  {
+    "slug": "kingston-upon-thames",
+    "id": 314
+  },
+  {
+    "slug": "newham",
+    "id": 316
+  },
+  {
+    "slug": "redbridge",
+    "id": 317
+  },
+  {
+    "slug": "richmond-upon-thames",
+    "id": 318
+  },
+  {
+    "slug": "sutton",
+    "id": 319
+  },
+  {
+    "slug": "waltham-forest",
+    "id": 320
+  },
+  {
+    "slug": "birmingham",
+    "id": 330
+  },
+  {
+    "slug": "solihull",
+    "id": 334
+  },
+  {
+    "slug": "wirral",
+    "id": 344
+  },
+  {
+    "slug": "coventry",
+    "id": 331
+  },
+  {
+    "slug": "dudley",
+    "id": 332
+  },
+  {
+    "slug": "sandwell",
+    "id": 333
+  },
+  {
+    "slug": "walsall",
+    "id": 335
+  },
+  {
+    "slug": "wolverhampton",
+    "id": 336
+  },
+  {
+    "slug": "knowsley",
+    "id": 340
+  },
+  {
+    "slug": "liverpool",
+    "id": 341
+  },
+  {
+    "slug": "st-helens",
+    "id": 342
+  },
+  {
+    "slug": "sefton",
+    "id": 343
+  },
+  {
+    "slug": "telford-and-wrekin",
+    "id": 894
+  },
+  {
+    "slug": "bolton",
+    "id": 350
+  },
+  {
+    "slug": "bury",
+    "id": 351
+  },
+  {
+    "slug": "manchester",
+    "id": 352
+  },
+  {
+    "slug": "oldham",
+    "id": 353
+  },
+  {
+    "slug": "rochdale",
+    "id": 354
+  },
+  {
+    "slug": "salford",
+    "id": 355
+  },
+  {
+    "slug": "stockport",
+    "id": 356
+  },
+  {
+    "slug": "trafford",
+    "id": 358
+  },
+  {
+    "slug": "tameside",
+    "id": 357
+  },
+  {
+    "slug": "wigan",
+    "id": 359
+  },
+  {
+    "slug": "barnsley",
+    "id": 370
+  },
+  {
+    "slug": "doncaster",
+    "id": 371
+  },
+  {
+    "slug": "rotherham",
+    "id": 372
+  },
+  {
+    "slug": "sheffield",
+    "id": 373
+  },
+  {
+    "slug": "north-yorkshire",
+    "id": 815
+  },
+  {
+    "slug": "calderdale",
+    "id": 381
+  },
+  {
+    "slug": "kirklees",
+    "id": 382
+  },
+  {
+    "slug": "leeds",
+    "id": 383
+  },
+  {
+    "slug": "wakefield",
+    "id": 384
+  },
+  {
+    "slug": "gateshead",
+    "id": 390
+  },
+  {
+    "slug": "newcastle-upon-tyne",
+    "id": 391
+  },
+  {
+    "slug": "north-tyneside",
+    "id": 392
+  },
+  {
+    "slug": "south-tyneside",
+    "id": 393
+  },
+  {
+    "slug": "sunderland",
+    "id": 394
+  },
+  {
+    "slug": "cambridgeshire",
+    "id": 873
+  },
+  {
+    "slug": "bristol",
+    "id": 801
+  },
+  {
+    "slug": "bath-and-north-east-somerset",
+    "id": 800
+  },
+  {
+    "slug": "south-gloucestershire",
+    "id": 803
+  },
+  {
+    "slug": "north-somerset",
+    "id": 802
+  },
+  {
+    "slug": "county-durham",
+    "id": 840
+  },
+  {
+    "slug": "nottinghamshire",
+    "id": 891
+  },
+  {
+    "slug": "central-bedfordshire",
+    "id": 823
+  },
+  {
+    "slug": "bedford",
+    "id": 822
+  },
+  {
+    "slug": "luton",
+    "id": 821
+  },
+  {
+    "slug": "reading",
+    "id": 870
+  },
+  {
+    "slug": "west-berkshire",
+    "id": 869
+  },
+  {
+    "slug": "bracknell-forest",
+    "id": 867
+  },
+  {
+    "slug": "windsor-and-maidenhead",
+    "id": 868
+  },
+  {
+    "slug": "wokingham",
+    "id": 872
+  },
+  {
+    "slug": "slough",
+    "id": 871
+  },
+  {
+    "slug": "buckinghamshire",
+    "id": 825
+  },
+  {
+    "slug": "milton-keynes",
+    "id": 826
+  },
+  {
+    "slug": "peterborough",
+    "id": 874
+  },
+  {
+    "slug": "warrington",
+    "id": 877
+  },
+  {
+    "slug": "cheshire-west-and-chester",
+    "id": 896
+  },
+  {
+    "slug": "halton",
+    "id": 876
+  },
+  {
+    "slug": "cheshire-east",
+    "id": 895
+  },
+  {
+    "slug": "hartlepool",
+    "id": 805
+  },
+  {
+    "slug": "stockton-on-tees",
+    "id": 808
+  },
+  {
+    "slug": "redcar-and-cleveland",
+    "id": 807
+  },
+  {
+    "slug": "middlesbrough",
+    "id": 806
+  },
+  {
+    "slug": "cornwall",
+    "id": 908
+  },
+  {
+    "slug": "cumbria",
+    "id": 909
+  },
+  {
+    "slug": "derbyshire",
+    "id": 830
+  },
+  {
+    "slug": "derby",
+    "id": 831
+  },
+  {
+    "slug": "devon",
+    "id": 878
+  },
+  {
+    "slug": "torbay",
+    "id": 880
+  },
+  {
+    "slug": "plymouth",
+    "id": 879
+  },
+  {
+    "slug": "pre-lgr-2019-dorset",
+    "id": 835
+  },
+  {
+    "slug": "dorset",
+    "id": 838
+  },
+  {
+    "slug": "bournemouth-christchurch-and-poole",
+    "id": 839
+  },
+  {
+    "slug": "pre-lgr-2019-poole",
+    "id": 836
+  },
+  {
+    "slug": "darlington",
+    "id": 841
+  },
+  {
+    "slug": "brighton-and-hove",
+    "id": 846
+  },
+  {
+    "slug": "east-sussex",
+    "id": 845
+  },
+  {
+    "slug": "west-sussex",
+    "id": 938
+  },
+  {
+    "slug": "essex",
+    "id": 881
+  },
+  {
+    "slug": "southend-on-sea",
+    "id": 882
+  },
+  {
+    "slug": "thurrock",
+    "id": 883
+  },
+  {
+    "slug": "gloucestershire",
+    "id": 916
+  },
+  {
+    "slug": "hampshire",
+    "id": 850
+  },
+  {
+    "slug": "southampton",
+    "id": 852
+  },
+  {
+    "slug": "portsmouth",
+    "id": 851
+  },
+  {
+    "slug": "herefordshire",
+    "id": 884
+  },
+  {
+    "slug": "worcestershire",
+    "id": 885
+  },
+  {
+    "slug": "kingston-upon-hull",
+    "id": 810
+  },
+  {
+    "slug": "north-lincolnshire",
+    "id": 813
+  },
+  {
+    "slug": "north-east-lincolnshire",
+    "id": 812
+  },
+  {
+    "slug": "east-riding-of-yorkshire",
+    "id": 811
+  },
+  {
+    "slug": "isle-of-wight",
+    "id": 921
+  },
+  {
+    "slug": "kent",
+    "id": 886
+  },
+  {
+    "slug": "medway",
+    "id": 887
+  },
+  {
+    "slug": "blackburn-with-darwen",
+    "id": 889
+  },
+  {
+    "slug": "lancashire",
+    "id": 888
+  },
+  {
+    "slug": "blackpool",
+    "id": 890
+  },
+  {
+    "slug": "leicestershire",
+    "id": 855
+  },
+  {
+    "slug": "leicester",
+    "id": 856
+  },
+  {
+    "slug": "rutland",
+    "id": 857
+  },
+  {
+    "slug": "lincolnshire",
+    "id": 925
+  },
+  {
+    "slug": "norfolk",
+    "id": 926
+  },
+  {
+    "slug": "york",
+    "id": 816
+  },
+  {
+    "slug": "west-northamptonshire",
+    "id": 941
+  },
+  {
+    "slug": "pre-lgr-2021-northamptonshire",
+    "id": 928
+  },
+  {
+    "slug": "north-northamptonshire",
+    "id": 940
+  },
+  {
+    "slug": "warwickshire",
+    "id": 937
+  },
+  {
+    "slug": "northumberland",
+    "id": 929
+  },
+  {
+    "slug": "nottingham",
+    "id": 892
+  },
+  {
+    "slug": "oxfordshire",
+    "id": 931
+  },
+  {
+    "slug": "shropshire",
+    "id": 893
+  },
+  {
+    "slug": "somerset",
+    "id": 933
+  },
+  {
+    "slug": "stoke-on-trent",
+    "id": 861
+  },
+  {
+    "slug": "staffordshire",
+    "id": 860
+  },
+  {
+    "slug": "suffolk",
+    "id": 935
+  },
+  {
+    "slug": "wiltshire",
+    "id": 865
+  },
+  {
+    "slug": "swindon",
+    "id": 866
+  },
+  {
+    "slug": "bfpo-overseas-establishments",
+    "id": 702
+  },
+  {
+    "slug": "fieldwork-overseas-establishments",
+    "id": 704
+  },
+  {
+    "slug": "isles-of-scilly",
+    "id": 420
+  },
+  {
+    "slug": "pre-lgr-2019-bournemouth",
+    "id": 837
+  }
+]

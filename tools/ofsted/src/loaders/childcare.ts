@@ -7,7 +7,7 @@ import {
   gender,
   town,
   getId,
-  date,
+  dateWithFormat,
   rating,
 } from "../utils";
 import { parser } from "../parser";
@@ -22,6 +22,8 @@ export const getChildcareInformation = async (
     dir,
     "Childcare_provider_level_data_as_at_31_August_2021.csv"
   );
+
+  const date = dateWithFormat('dd/MM/yyyy');
 
   const transformer = (row: any): ISchool | undefined => {
     if(row['Provider URN'] === "") {
@@ -89,7 +91,7 @@ export const getChildcareInformation = async (
       gender: gender("MIXED"),
       religiousCharacter: undefined,
       adminPolicy: undefined,
-      ofstedRating: rating(row['ost recent full: Overall effectiveness']),
+      ofstedRating: rating(row['Most recent full: Overall effectiveness']),
       dateOfLastInspection: date(row['Most recent full: Inspection date']),
 
       census: undefined,
@@ -98,6 +100,12 @@ export const getChildcareInformation = async (
       keyStage4: undefined,
       keyStage5: undefined
     };
+
+    if(row['Provider URN'] === '119603') {
+      console.log(JSON.stringify(row));
+      console.log();
+      console.log(JSON.stringify(school));
+    }
 
     return school;
   };

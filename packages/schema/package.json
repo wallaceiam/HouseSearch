@@ -1,0 +1,11 @@
+{
+  "name": "@locawise/schema",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc --build --watch",
+    "compile": "tsc --build"
+  }
+}

@@ -11,6 +11,10 @@ export interface IPostcodeLookup {
   };
 }
 
+export interface IValueType {
+  readonly id: string;
+  readonly name: string;
+}
 export interface ILocalAuthority {
   readonly localAuthorityId: number, 
   readonly localAuthority: string
@@ -157,8 +161,8 @@ export interface ISchool {
   readonly minorGroup: string;
   readonly schoolType: string;
   readonly isOpen: boolean;
-  readonly openDate: Date | undefined;
-  readonly closedDate: Date | undefined;
+  readonly openDate: number | undefined;
+  readonly closedDate: number | undefined;
 
   readonly isNursery: boolean;
   readonly isPrimary: boolean;
@@ -173,7 +177,7 @@ export interface ISchool {
   readonly adminPolicy: string | undefined;
 
   readonly ofstedRating: 1 | 2 | 3 | 4 | 0;
-  readonly dateOfLastInspection: Date | undefined;
+  readonly dateOfLastInspection: number | undefined;
 
   readonly census: ICensusData | undefined;
   readonly financials: IFinancialData | undefined;

@@ -1,9 +1,19 @@
+import parse from "date-fns/parse";
+
 export const date = (a: string | undefined) => {
   if (a === undefined || a.length < 1) {
     return undefined;
   }
 
-  return new Date(a);
+  return new Date(a)?.getDate();
+};
+
+export const dateWithFormat = (format: string) => (a: string | undefined) => {
+  if (a === undefined || a.length < 1) {
+    return undefined;
+  }
+
+  return parse(a, format, new Date())?.getDate();
 };
 
 export const telephone = (a: string | undefined) => {
@@ -30,6 +40,24 @@ export const localAuthority = (a: string | undefined) => {
     .replace(/st helens/i, "St. Helens");
 
   return b;
+};
+
+// https://www.sims-partners.com/General-Advice/Publications/Bournemouth
+export const localAuthorityMapper = (id: string, name: string) => {
+  if (id === "835") {
+    return { localAuthorityId: "838", localAuthority: "Dorset" };
+  } else if (id === "836" || id === "837") {
+    return {
+      localAuthorityId: "839",
+      localAuthority: "Bournemouth, Christchurch & Poole",
+    };
+  } else if(id === '928') {
+    return {
+      localAuthorityId: id,
+      name: 'Northamptonshire (Pre LGR-2021)'
+    }
+  }
+  return { localAuthorityId: id, localAuthority: name };
 };
 
 export const town = (a: string | undefined) => {

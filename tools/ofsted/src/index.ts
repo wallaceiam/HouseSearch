@@ -9,11 +9,12 @@ import {
   getFinancials,
   getTeacherInformation,
   getLocalAuthorities,
+  getSchoolType,
 } from "./loaders";
 
 import { ISchool } from "./types";
 import { merge } from "./merge";
-import { saveSchools } from "./utils";
+import { saveLocalAuthorities, saveSchoolTypes, saveSchools } from "./utils";
 
 const save = async (dir: string, schools: ISchool[]) =>
   new Promise<void>((resolve) => {
@@ -21,6 +22,8 @@ const save = async (dir: string, schools: ISchool[]) =>
     stream.write(JSON.stringify(schools, undefined, 2));
     resolve();
   });
+
+
 
 // const printUnique = (a: any[]) => {
 //   const unique = [...new Set(a)].sort();
@@ -30,24 +33,31 @@ const save = async (dir: string, schools: ISchool[]) =>
 async function main() {
   const dir = path.resolve(__dirname, "..", "..", "..", "data");
 
-  console.log('Getting local authorites...');
+  console.log("Getting local authorites...");
   const localAuthorities = await getLocalAuthorities(dir);
 
-  console.log('Getting postcodes...');
+  console.log("Getting school types...");
+  const schoolTypes = await getSchoolType(dir);
+
+  console.log("Getting postcodes...");
   const postcodes = await getPostcodeLookup(dir);
 
-  console.log('Getting childcare...');
-  const childcare = await getChildcareInformation(dir, postcodes, localAuthorities);
-  console.log('Getting schools...');
+  console.log("Getting childcare...");
+  const childcare = await getChildcareInformation(
+    dir,
+    postcodes,
+    localAuthorities
+  );
+  console.log("Getting schools...");
   const schools = await getSchoolInformation(dir, postcodes);
-  console.log('Getting census...');
+  console.log("Getting census...");
   const census = await getCensus(dir);
-  console.log('Getting financials...');
+  console.log("Getting financials...");
   const financials = await getFinancials(dir);
-  console.log('Getting teachers...');
+  console.log("Getting teachers...");
   const teachers = await getTeacherInformation(dir);
 
-  console.log('Merging...');
+  console.log("Merging...");
   const merged = merge(childcare, schools, census, financials, teachers);
 
   const all = [...merged.filter(({ isOpen }) => isOpen)];
@@ -61,7 +71,20 @@ async function main() {
     return prev;
   }, new Array<string>());
 
-  console.log('Saving...');
+  const allIds = [
+    ...childcare.map(({ id }) => id),
+    ...schools.map(({ id }) => id),
+  ];
+  allIds.reduce((prev, cur) => {
+    if (prev.includes(cur)) {
+      console.warn(`DUPLICATE KEY DETECTED: ${cur}`);
+    } else {
+      prev.push(cur);
+    }
+    return prev;
+  }, new Array<string>());
+
+  console.log("Saving...");
 
   // const allValues = all.map(
   //   ({ religiousCharacter }) => religiousCharacter ?? ""
@@ -69,6 +92,9 @@ async function main() {
   // printUnique(allValues);
 
   await save(dir, all);
+
+  await saveLocalAuthorities(localAuthorities);
+  await saveSchoolTypes(schoolTypes);
 
   await saveSchools(all);
 }

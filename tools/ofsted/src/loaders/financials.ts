@@ -12,7 +12,7 @@ export const getFinancials = async (dir: string) => {
     }
     const cfi: IFinancials = {
       urn: row["URN"],
-      localAuthorityId: row["LA"],
+      localAuthorityId: +row["LA"],
       data: {
         isLondon: row["LONDON/NON-LONDON"] === "London",
         median: row["MEDIAN"],

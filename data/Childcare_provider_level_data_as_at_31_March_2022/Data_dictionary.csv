@@ -1,0 +1,133 @@
+﻿Field name,Description
+Web link,Link to provider's details and Ofsted reports(s).
+Provider URN,Unique number to distinguish between each provider.
+Registration date,Date provider registered with Ofsted.
+CA Reference,Unique Childminder Agency reference number.
+Provider type,"Type of provider. In this spreadsheet, all active childcare providers are detailed on the same tab:
+Childcare providers tab = childminder, childcare on non-domestic premises, childcare on domestic premises, home childcarer.
+All four of the above provider types are included in the 'Providers that have left the EYR' tab.
+Childminder agencies are included in the 'Childminder agencies' tab. Childminder agencies were introduced in September 2014 as an option for childminders to register with. Childminders who register with an agency no longer need to register or be inspected by Ofsted, although the agency itself will receive an inspection. "
+Provider subtype,"Full day care = providers who operate for 3 hours or more per day, 5 days or more per week, and 45 weeks or more per year 
+Sessional day care = providers who operate for less than 3 hours per day, less than 5 days per week, or less than 45 weeks per year 
+Out-of-school day care = providers who care exclusively for children at the beginning and end of the school day or in holiday periods 
+Home childcarers = childminders who also care for children of any age wholly or mainly in the child’s own home"
+Provider status,"Active = Provider registered to provide childcare places
+Cancelled = Provider's registration has been cancelled
+Cancelled non-payment of fee = provider has been cancelled, having not paid their registration fee
+Exempt = Provider does not require early years registration
+Resigned = Provider has resigned its registration
+Suspended = Provider's registration has been suspended"
+Individual Register combinations,"Combination of registers the provider is on.
+EYR = Early Years Register
+CCR = Compulsory Childcare Register
+VCR = Voluntary Childcare Register"
+Provider Early Years Register Flag,"Flag to indicate if provider is on the Early Years Register (EYR). 
+Y = on the EYR
+N = not on the EYR"
+Provider Voluntary Childcare Register Flag,"Flag to indicate if provider is on the Voluntary Childcare Register (VCR).
+Y = on the VCR
+N = not on the VCR"
+Provider Compulsory Childcare Register Flag,"Flag to indicate if provider is on the Compulsory Childcare Register (CCR).
+Y = on the CCR
+N = not on the CCR"
+Registered person URN,"Unique number to distinguish between each registered person - redacted where required.
+The registered person is the individual or organisation who runs the childcare. It may be an individual, such as a sole trader, a company or an incorporated or unincorporated association, such as a committee.
+Childminders and home childcarers are classed as the registered person for the care that they provide. Therefore, they do not have a separate Registered Person URN (their values are recorded as NULL in this field), but still have their Provider URN as their unique identifier."
+Registered_Person_Name,"Name of the registered person - redacted where required.
+As with Registered Person URN, childminders and home childcarers are classed as the registered person for the care that they provide. Therefore, they do not have a separate Registered Person Name (their values are recorded as NULL in this field)."
+Provider name,Name of the provider - redacted where required.
+Provider address line 1,First line of provider address  - redacted where required.
+Provider address line 2,Second line of provider address  - redacted where required.
+Provider address line 3,Third line of provider address  - redacted where required.
+Provider town,Town of provider  - redacted where required.
+Postcode,Postcode of provider - fully or partially redacted where required.
+Telephone number,Telephone number of provider  - redacted where required.
+Parliamentary constituency,Parliamentary constituency name.
+Local authority,Local authority name.
+Region,Government office region (of which there are nine in England).
+Ofsted Region,Eight regions Ofsted uses to organise its work.
+Deprivation Band,"Providers are allocated to one of five deprivation bands, based on quintiles calculated from The Income Deprivation Affecting Children Index (IDACI) rank of all lower super output area (LSOA). The IDACI is a sub-section of the Index of Multiple Deprivation (IMD) that is produced by the Ministry of Housing, Communities & Local Government: https://www.gov.uk/government/collections/english-indices-of-deprivation."
+Places,The maximum number of children aged under eight that may attend the provision at any one time. Data was unavailable for a small number of EYR providers at the time of compilation.
+Places including estimates,"The number of children aged under eight that may attend the provision at any one time, plus estimates for the number of places provided where data was unavailable at the time of compilation."
+Inspection number,A unique number to distinguish between each inspection.
+Most recent full: Inspection number,A unique number to distinguish between each full Early Years Register (EYR) inspection.
+Most recent full: Inspection date,"The date of the inspection. If the duration of an inspection is more than one day, this is the last date of the inspection."
+Most recent full: Overall effectiveness,"Overall effectiveness (the quality and standards of the provision)' outcome at the most recent full Early Years Register (EYR) inspection.
+1 = Outstanding
+2 = Good 
+3 = Satisfactory/Requires Improvement
+4 = Inadequate 
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Quality of education,"Additional judgement, 'Quality of education', made at the most recent full Early Years Register (EYR) inspection.
+1 = Outstanding
+2 = Good 
+3 = Satisfactory/Requires Improvement
+4 = Inadequate
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Behaviour and attitudes,"Additional judgement, 'Behaviour and attitudes', made at the most recent full Early Years Register (EYR) inspection.
+1 = Outstanding
+2 = Good 
+3 = Satisfactory/Requires Improvement
+4 = Inadequate 
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Personal development,"Additional judgement, 'Personal development', made at the most recent full Early Years Register (EYR) inspection.
+1 = Outstanding
+2 = Good 
+3 = Satisfactory/Requires Improvement
+4 = Inadequate 
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Effectiveness of leadership and management,"Additional judgement, 'Effectiveness of leadership and management', made at the most recent full Early Years Register (EYR) inspection.
+1 = Outstanding
+2 = Good 
+3 = Satisfactory/Requires Improvement
+4 = Inadequate 
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Safeguarding is effective?,"Additional judgement about the effectiveness of the arrangements for safeguarding children (EYR inspection where children are present).
+Yes
+No
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+CCR requirements suitability,"Compulsory Childcare Register (CCR) outcome at the most recent full Early Years Register inspection.
+Met = met the requirements of the CCR
+Not met (with actions) = did not meet the requirements of the CCR, with actions to meet the requirements
+Not met (with enforcement) = did not meet the requirements of the CCR, with enforcement to meet the requirements or remove the registration
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+VCR requirements suitability,"Voluntary Childcare Register (VCR) outcome at the most recent full Early Years Register inspection.
+Met = met the requirements of the VCR
+Not met (with actions) = did not meet the requirements of the VCR, with actions to meet the requirements
+Not met (with enforcement) = did not meet the requirements of the VCR, with enforcement to meet the requirements or remove the registration
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Second most recent full: Overall effectiveness,"Overall effectiveness (the quality and standards of the provision)' outcome at the second most recent full inspection. 
+1 = Outstanding
+2 = Good
+3 = Requires improvement
+4 = Inadequate
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Second most recent full: Inspection number,A unique number to distinguish between each inspection.
+Second most recent full: Inspection date,Date of second most recent full inspection.
+Third most recent full: Overall effectiveness,"Overall effectiveness (the quality and standards of the provision)' outcome at the third most recent full inspection. 
+1 = Outstanding
+2 = Good
+3 = Requires improvement
+4 = Inadequate
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+Third most recent full: Inspection number,A unique number to distinguish between each inspection.
+Third most recent full: Inspection date,Date of third most recent full inspection.
+NCOR: Inspection number,Unique number to distinguish the provider's most recent No Children on Roll (NCOR) inspection.
+NCOR: Inspection date,"Date of the most recent inspection where the provider had No Children on Roll (NCOR). If the duration of an inspection is more than one day, this is the last date of the inspection."
+NCOR: Overall effectiveness,"Overall effectiveness (the quality and standards of the provision)' at the most recent inspection where there were No Children on Roll (NCOR).
+Met = met the requirements of the NCOR inspection
+Not met (with actions) = did not meet the requirements of the NCOR inspection, with actions to meet the requirements
+Not met (with enforcement) = did not meet the requirements of the NCOR inspection, with enforcement to meet the requirements
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+CR: Inspection number,Unique number to distinguish the provider's most recent Childcare Register (CR) inspection.
+CR: Inspection date,"Date of the provider's most recent Childcare Register inspection. If the duration of an inspection is more than one day, this is the last date of the inspection."
+CR: Overall effectiveness,"Overall effectiveness (the quality and impact of the service on childcare provision)' outcome at the most recent Childcare Register (CR) inspection.
+Met = met the requirements of the CR
+Not met (with actions) = did not meet the requirements of the CR, with actions to meet the requirements
+Not met (with enforcement) = did not meet the requirements of the CR, with enforcement to meet the requirements or remove the registration
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"
+CA - Most recent inspection date,Date of the most recent inspection of the Childminder Agency.
+CA - Most recent inspection outcome,"Inspection outcome at the most recent Childminder Agency (CA) inspection.
+Effective = was effective in meeting the requirements of the CA inspection
+Not effective = was not effective in meeting the requirements of the CA inspection
+[Blank cell] / NULL / [-] = Not applicable or did not receive a judgement"

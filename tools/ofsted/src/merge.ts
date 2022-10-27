@@ -68,12 +68,12 @@ export const merge = (
         c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
     );
     const financialData = financials.find(
-      (c) =>
-        c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
+      (f) =>
+        f.urn === school.urn && f.localAuthorityId === school.localAuthorityId
     );
     const teacherData = teachers.find(
-      (c) =>
-        c.urn === school.urn && c.localAuthorityId === school.localAuthorityId
+      (t) =>
+        t.urn === school.urn && t.localAuthorityId === school.localAuthorityId
     );
     return {
       ...school,

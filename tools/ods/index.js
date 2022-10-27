@@ -1,13 +1,21 @@
 const XLSX = require("xlsx");
 const path = require('path');
+const fs = require('fs/promises');
 
-const fileName = 'Childcare_provider_level_data_as_at_31_August_2021.ods';
+const fileName = 'Childcare_provider_level_data_as_at_31_March_2022.ods';
 const dir = path.resolve(__dirname, '..', '..', 'data');
 
 const inFile = path.resolve(dir, fileName);
 
-const workbook = XLSX.readFile(inFile);
+const workbook = XLSX.readFile(inFile, { cellFormula: true });
 
-const outFile = path.resolve(dir, fileName.replace('.ods', '.csv'));
+const outDir = path.resolve(dir, fileName.replace('.ods', ''));
 
-XLSX.writeFile(workbook, outFile, { type: "csv", sheet: "D1-_Childcare_providers"});
+fs.mkdir(outDir).then(() => {
+
+  XLSX.writeFileXLSX(workbook, path.resolve(outDir, fileName.replace('.ods', '.xlsx')));
+  workbook.SheetNames.forEach((sheet) => {
+    const file = path.resolve(outDir, `${sheet}.csv`);
+    XLSX.writeFile(workbook, file, { type: "csv", sheet });
+  });
+});

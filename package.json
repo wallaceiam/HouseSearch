@@ -1,0 +1,45 @@
+{
+  "name": "locawise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wallaceiam/HouseSearch.git",
+  "author": "Chris Wallace <chris@mymojo.ca>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "client:dev": "yarn workspace client dev",
+    "client:start": "yarn workspace client start",
+    "client:compile": "yarn workspace client compile",
+    "schema:dev": "yarn workspace @locawise/schema dev",
+    "schema:compile": "yarn workspace @locawise/schema compile",
+    "server:start": "yarn workspace server start",
+    "server:dev": "yarn workspace server dev",
+    "server:compile": "yarn workspace server compile",
+    "tools:ofsted:compile": "yarn workspace ofsted compile",
+    "tools:ofsted:start": "yarn workspace ofsted start"
+
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@faker-js/faker": "^6.2.0",
+    "@jest/globals": "^27.2.2",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.12",
+    "@ryansonshine/commitizen": "^4.2.8",
+    "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+    "jest": "^27.2.2",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.5.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
+    }
+  }
+}

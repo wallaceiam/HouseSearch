@@ -21,7 +21,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Server",
-      "cwd": "${workspaceFolder}/server",
+      "cwd": "${workspaceFolder}/apps/server",
       "outputCapture": "std",
       "sourceMaps": true,
       "preLaunchTask": "server:yarn:compile",
