@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from "next";
+import Layout from "../../../../../components/Layout";
 import {
   getSchoolTypeById,
   getLocalAuthorityById,
@@ -36,11 +37,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const Post = ({ localAuthority, schoolType, school }: any) => {
   // Render post...
   return (
-    <>
+    <Layout>
       <h1>{localAuthority}</h1>
       <p>{schoolType}</p>
       <p>{JSON.stringify(school)}</p>
-    </>
+    </Layout>
   );
 };
 

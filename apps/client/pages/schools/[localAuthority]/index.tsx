@@ -1,5 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import Link from "next/link";
+import Layout from "../../../components/Layout";
 import {
   getSchoolTypes,
   getLocalAuthorities,
@@ -39,7 +40,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const Post = ({ localAuthorityId, localAuthority, schoolTypes }: any) => {
   // Render post...
   return (
-    <>
+    <Layout>
       <h1>{localAuthority}</h1>
       {Object.keys(schoolTypes).map((key) => (
         <p key={key}>
@@ -53,7 +54,7 @@ const Post = ({ localAuthorityId, localAuthority, schoolTypes }: any) => {
           </Link>
         </p>
       ))}
-    </>
+    </Layout>
   );
 };
 

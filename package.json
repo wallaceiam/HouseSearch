@@ -12,9 +12,12 @@
     "tools/*"
   ],
   "scripts": {
+    "release": "standard-version",
+    "commit": "git add -A && cz --amend",
     "client:dev": "yarn workspace client dev",
     "client:start": "yarn workspace client start",
     "client:compile": "yarn workspace client compile",
+    "client:storybook": "yarn workspace client storybook",
     "schema:dev": "yarn workspace @locawise/schema dev",
     "schema:compile": "yarn workspace @locawise/schema compile",
     "server:start": "yarn workspace server start",
