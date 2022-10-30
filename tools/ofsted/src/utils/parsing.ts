@@ -5,7 +5,7 @@ export const date = (a: string | undefined) => {
     return undefined;
   }
 
-  return new Date(a)?.getDate();
+  return new Date(a)?.getTime();
 };
 
 export const dateWithFormat = (format: string) => (a: string | undefined) => {
@@ -13,7 +13,7 @@ export const dateWithFormat = (format: string) => (a: string | undefined) => {
     return undefined;
   }
 
-  return parse(a, format, new Date())?.getDate();
+  return parse(a, format, new Date())?.getTime();
 };
 
 export const telephone = (a: string | undefined) => {
