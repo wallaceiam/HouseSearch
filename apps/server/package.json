@@ -82,8 +82,8 @@
     "supertest": "^6.1.6"
   },
   "dependencies": {
-    "@locawise/schema": "1.0.0",
     "@fast-csv/parse": "^4.3.6",
+    "@locawise/schema": "1.0.0",
     "@turf/boolean-disjoint": "^6.5.0",
     "@turf/circle": "^6.5.0",
     "@turf/helpers": "^6.5.0",
@@ -103,7 +103,7 @@
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
-    "mongoose": "6.4.6",
+    "mongoose": "^6.7.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.2",
     "passport": "^0.6.0",

@@ -1,4 +1,5 @@
 import Redis from "ioredis";
+import mongoose from 'mongoose';
 
 import { ILocalAuthority, ISchool } from "src/types";
 import { slug } from "./id";
