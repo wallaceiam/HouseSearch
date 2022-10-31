@@ -213,7 +213,7 @@ export const saveSchoolTypes = async (schoolTypes: string[]) => {
     schoolTypes.find(
       (id) => `${toSchoolTypeSlug(id)}` !== key
     )
-  );
+  ); 
 
   const pipeline = await redis.pipeline();
   pipeline.del(`${prefix}.index`);
