@@ -12,15 +12,43 @@ services:
 
   backend:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: /apps/server/Dockerfile
     image: backend
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/right-location
     ports:
-      - '3000:3000'
+      - '3010:3010'
     depends_on:
-      - redis
+      - mongodb
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: .
+      dockerfile: ./apps/client/Dockerfile
+    image: backend
+    environment:
+      - SERVER_URL=http://backend
+    ports:
+      - '3010:3010'
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  public:
+    build:
+      context: .
+      dockerfile: /apps/public/Dockerfile
+    image: backend
+    environment:
+      - SERVER_URL=http://backend
+    ports:
+      - '3010:3010'
+    depends_on:
+      - mongodb
     networks:
       - app-network
 

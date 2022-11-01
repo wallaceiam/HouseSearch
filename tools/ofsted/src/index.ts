@@ -57,6 +57,9 @@ async function main() {
   console.log("Getting teachers...");
   const teachers = await getTeacherInformation(dir);
 
+  const dates = [...childcare, ...schools].map(({dateOfLastInspection}) => dateOfLastInspection).filter((d) => d === NaN);
+  console.table(dates);
+
   console.log("Merging...");
   const merged = merge(childcare, schools, census, financials, teachers);
 
@@ -90,6 +93,8 @@ async function main() {
   //   ({ religiousCharacter }) => religiousCharacter ?? ""
   // );
   // printUnique(allValues);
+
+  
 
   await save(dir, all);
 

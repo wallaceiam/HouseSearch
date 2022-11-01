@@ -1,8 +1,6 @@
-export type ValueMap = {
-  readonly id: number;
-  readonly slug: string;
-  readonly name: string;
-}
+export * from "./localAuthority";
+export * from "./schoolType";
+export * from "./school";
 
 const noop = () => {};
 export default noop;

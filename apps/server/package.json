@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "tsc --build && pm2 start ecosystem.config.json --no-daemon",
-    "compile": "tsc --build",
+    "build": "tsc --build",
     "compile:watch": "tsc --build --watch",
     "pre:dev": "cross-env NODE_ENV=development nodemon --experimental-modules --es-module-specifier-resolution=node dist/index.js",
     "dev": "concurrently --kill-others \"yarn compile:watch\" \"yarn pre:dev\"",
@@ -83,7 +83,7 @@
   },
   "dependencies": {
     "@fast-csv/parse": "^4.3.6",
-    "@locawise/schema": "1.0.0",
+    "@rightlocation/schema": "1.0.0",
     "@turf/boolean-disjoint": "^6.5.0",
     "@turf/circle": "^6.5.0",
     "@turf/helpers": "^6.5.0",
@@ -99,7 +99,6 @@
     "express-rate-limit": "^5.5.1",
     "helmet": "^4.6.0",
     "http-status": "^1.5.0",
-    "ioredis": "^5.2.3",
     "joi": "^17.5.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",

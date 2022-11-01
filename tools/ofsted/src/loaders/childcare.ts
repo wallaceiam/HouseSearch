@@ -53,6 +53,10 @@ export const getChildcareInformation = async (
       console.warn(`LA not found for ${localAuthortiy}`);
     }
 
+    const optional = {
+      address2: blankOrUndefined(row["Provider address line 2"]),
+    }
+
     const school: ISchool = {
       id,
       // http://www.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/CARE/EY101465
@@ -77,7 +81,7 @@ export const getChildcareInformation = async (
       // 'Registered_Person_Name',
       name: row["Provider name"],
       address: row["Provider address line 1"],
-      address2: blankOrUndefined(row["Provider address line 2"]),
+      ...optional,
       address3: blankOrUndefined(row["Provider address line 3"]),
       town: town(row["Provider town"]),
       postcode,

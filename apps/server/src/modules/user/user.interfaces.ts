@@ -7,7 +7,7 @@ export interface IUser {
   email: string;
   password: string;
   role: string;
-  isEmailVerified: boolean;
+  isEmailVerified: Boolean;
 }
 
 export interface IUserDoc extends IUser, Document {

@@ -150,34 +150,34 @@ export interface ISchool {
 
   readonly name: string;
   readonly address: string;
-  readonly address2: string | undefined;
-  readonly address3: string | undefined;
+  readonly address2?: string;
+  readonly address3?: string;
   readonly town: string;
   readonly postcode: string;
-  readonly telephone: string | undefined;
+  readonly telephone?: string;
   readonly lat: number;
   readonly long: number;
 
   readonly minorGroup: string;
   readonly schoolType: string;
   readonly isOpen: boolean;
-  readonly openDate: number | undefined;
-  readonly closedDate: number | undefined;
+  readonly openDate?: number;
+  readonly closedDate?: number;
 
   readonly isNursery: boolean;
   readonly isPrimary: boolean;
   readonly isSecondary: boolean;
   readonly isPost16: boolean;
 
-  readonly ageLow: number | undefined;
-  readonly ageHigh: number | undefined;
+  readonly ageLow?: number;
+  readonly ageHigh?: number;
   readonly gender: number;
 
-  readonly religiousCharacter: string | undefined;
-  readonly adminPolicy: string | undefined;
+  readonly religiousCharacter?: string;
+  readonly adminPolicy?: string;
 
   readonly ofstedRating: 1 | 2 | 3 | 4 | 0;
-  readonly dateOfLastInspection: number | undefined;
+  readonly dateOfLastInspection?: number;
 
   readonly census: ICensusData | undefined;
   readonly financials: IFinancialData | undefined;

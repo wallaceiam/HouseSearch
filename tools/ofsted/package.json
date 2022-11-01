@@ -8,9 +8,9 @@
     "compile": "tsc --build"
   },
   "dependencies": {
+    "@rightlocation/schema": "1.0.0",
     "date-fns": "^2.29.3",
     "fast-csv": "^4.3.6",
-    "ioredis": "^5.2.3",
     "mongoose": "^6.7.0",
     "slugify": "^1.6.5",
     "uuid": "^9.0.0"

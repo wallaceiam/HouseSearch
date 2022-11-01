@@ -12,9 +12,15 @@ export const getSummaries = {
   }).and('lat', 'long', 'zoom')
 };
 
-
-export const getOfsted = {
+export const getSchoolsByLocalAuthority = {
   params: Joi.object().keys({
-    ofstedId: Joi.string().required(),
+    localAuthority: Joi.string().required(),
+  }),
+}
+
+export const getSchool = {
+  params: Joi.object().keys({
+    localAuthority: Joi.string().required(),
+    slug: Joi.string().required(),
   }),
 };

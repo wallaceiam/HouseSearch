@@ -5,7 +5,12 @@ export const date = (a: string | undefined) => {
     return undefined;
   }
 
-  return new Date(a)?.getTime();
+  const ret = new Date(a)?.getTime();
+  if(ret === Number.NaN || (ret as any) === 'NaN') {
+    console.warn(`DATE: ${a} is ${ret}`);
+    return undefined;
+  }
+  return ret;
 };
 
 export const dateWithFormat = (format: string) => (a: string | undefined) => {
@@ -13,7 +18,12 @@ export const dateWithFormat = (format: string) => (a: string | undefined) => {
     return undefined;
   }
 
-  return parse(a, format, new Date())?.getTime();
+  const ret = parse(a, format, new Date())?.getTime();
+  if(ret === Number.NaN || (ret as any) === 'NaN') {
+    console.warn(`DATE: ${a} is ${ret}`);
+    return undefined;
+  }
+  return ret;
 };
 
 export const telephone = (a: string | undefined) => {

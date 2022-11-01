@@ -30,11 +30,19 @@ export const getSummaries = catchAsync(async (req: Request, res: Response) => {
   res.send(result);
 });
 
-export const getOfsted = catchAsync(async (req: Request, res: Response) => {
-  const id = pick(req.params, ['ofstedId']);
-    const school = await service.getSchoolById(id.ofstedId);
-    if (!school) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'School not found');
-    }
-    res.send(school);
+export const getSchoolsByLocalAuthority = catchAsync(async (req: Request, res: Response) => {
+  const filter = pick(req.params, ['localAuthority']);
+  const result = await service.querySummaries(filter);
+
+  res.send(result);
+});
+
+export const getSchool = catchAsync(async (req: Request, res: Response) => {
+  const filter = pick(req.params, ['localAuthority', 'slug']);
+  console.log(filter);
+  const result = await service.getSchoolById(filter);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, `School ${filter.slug} not found in ${filter.localAuthority}`);
+  }
+  res.send(result);
 });
