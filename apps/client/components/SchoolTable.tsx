@@ -10,19 +10,19 @@ interface ValueMap {
 
 interface SchoolRowPros {
   school: ISchool;
-  schoolTypes: ValueMap;
 }
-const SchoolRow = ({ school, schoolTypes }: SchoolRowPros) => {
+
+const SchoolRow = ({ school }: SchoolRowPros) => {
   const {
     slug,
     name,
-    localAuthority,
+    localAuthoritySlug,
+    classification,
     schoolType,
-    schoolSubType,
     address,
     telephone,
     postcode,
-    rating,
+    ofstedRating,
     lastInspDate,
   } = school as any;
   return (
@@ -30,11 +30,10 @@ const SchoolRow = ({ school, schoolTypes }: SchoolRowPros) => {
       <td className="border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
         <Link
           href={{
-            pathname: "/schools/[localAuthority]/[schoolType]/[school]",
+            pathname: "/schools/[localAuthoritySlug]/[slug]/",
             query: {
-              localAuthority,
-              schoolType,
-              school: slug,
+              localAuthoritySlug,
+              slug,
             },
           }}
         >
@@ -42,8 +41,8 @@ const SchoolRow = ({ school, schoolTypes }: SchoolRowPros) => {
         </Link>
       </td>
       <td className="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
-        <div className="text-gray-900">{schoolTypes[schoolType]}</div>
-        <div className="text-gray-500">{schoolSubType}</div>
+        <div className="text-gray-900">{classification}</div>
+        <div className="text-gray-500">{schoolType}</div>
       </td>
       {/* <td className="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 hidden sm:table-cell">
         Front-end Developer
@@ -55,7 +54,7 @@ const SchoolRow = ({ school, schoolTypes }: SchoolRowPros) => {
         <div className="text-gray-500">{telephone}</div>
       </td>
       <td className="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
-        <OfstedRating rating={rating} lastInspDate={lastInspDate} />
+        <OfstedRating rating={ofstedRating} lastInspDate={lastInspDate} />
       </td>
       <td className="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6 lg:pr-8">
         <a href="#" className="text-indigo-600 hover:text-indigo-900">
@@ -68,10 +67,9 @@ const SchoolRow = ({ school, schoolTypes }: SchoolRowPros) => {
 
 interface SchoolTableProps {
   schools?: ISchool[];
-  schoolTypes: ValueMap;
 }
 
-const SchoolTable = ({ schools, schoolTypes }: SchoolTableProps) => {
+const SchoolTable = ({ schools }: SchoolTableProps) => {
   return (
     <table className="min-w-full border-separate" style={{ borderSpacing: 0 }}>
       <thead className="bg-gray-50">
@@ -111,7 +109,7 @@ const SchoolTable = ({ schools, schoolTypes }: SchoolTableProps) => {
       <tbody className="bg-white">
         {schools &&
           schools.map((school) => (
-            <SchoolRow school={school} schoolTypes={schoolTypes} />
+            <SchoolRow key={school.slug} school={school} />
           ))}
       </tbody>
     </table>

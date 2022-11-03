@@ -4,7 +4,7 @@ interface ValueMap {
 }
 
 export const getSchoolTypes = async () => {
-  const result = await fetch('http://localhost:3010/v1/ofsted/schoolTypes')
+  const result = await fetch(`${process.env.SERVER_URL}/v1/ofsted/schoolTypes`)
   const data = await result.json();
   return data as ValueMap;
 };

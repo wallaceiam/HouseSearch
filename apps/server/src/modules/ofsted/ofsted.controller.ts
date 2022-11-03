@@ -24,21 +24,21 @@ export const getSchoolTypes = catchAsync(async (_req: Request, res: Response) =>
 });
 
 export const getSummaries = catchAsync(async (req: Request, res: Response) => {
-  const filter = pick(req.query, ['localAuthority', 'schoolType', 'ageRange', 'rating']);
+  const filter = pick(req.query, ['localAuthoritySlug', 'schoolType', 'ageRange', 'rating']);
   const result = await service.querySummaries(filter);
 
   res.send(result);
 });
 
 export const getSchoolsByLocalAuthority = catchAsync(async (req: Request, res: Response) => {
-  const filter = pick(req.params, ['localAuthority']);
+  const filter = pick(req.params, ['localAuthoritySlug']);
   const result = await service.querySummaries(filter);
 
   res.send(result);
 });
 
 export const getSchool = catchAsync(async (req: Request, res: Response) => {
-  const filter = pick(req.params, ['localAuthority', 'slug']);
+  const filter = pick(req.params, ['localAuthoritySlug', 'slug']);
   console.log(filter);
   const result = await service.getSchoolById(filter);
   if (!result) {

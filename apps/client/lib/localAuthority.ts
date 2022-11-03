@@ -4,7 +4,7 @@ interface ValueMap {
 }
 
 export const getLocalAuthorities = async () => {
-  const result = await fetch('http://localhost:3010/v1/ofsted/localAuthorities')
+  const result = await fetch(`${process.env.SERVER_URL}/v1/ofsted/localAuthorities`)
   const data = await result.json();
   return data as ValueMap;
 };

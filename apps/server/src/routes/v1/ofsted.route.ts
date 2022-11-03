@@ -10,9 +10,9 @@ router.route('/localAuthorities').get(ofstedController.getLocalAuthorities);
 
 router.route('/schoolTypes').get(ofstedController.getSchoolTypes);
 
-router.route('/:localAuthority').get(validate(ofstedValidation.getSchoolsByLocalAuthority), ofstedController.getSchoolsByLocalAuthority);
+router.route('/:localAuthoritySlug').get(validate(ofstedValidation.getSchoolsByLocalAuthority), ofstedController.getSchoolsByLocalAuthority);
 
-router.route('/:localAuthority/:slug').get(validate(ofstedValidation.getSchool), ofstedController.getSchool);
+router.route('/:localAuthoritySlug/:slug').get(validate(ofstedValidation.getSchool), ofstedController.getSchool);
 
 export default router;
 

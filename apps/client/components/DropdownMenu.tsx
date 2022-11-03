@@ -31,7 +31,6 @@ const DropdownMenu = ({ className, children }: DropdownMenuProps) => {
           />
         </button>
       </div>
-
       {/* <!--
                 Dropdown menu, show/hide based on menu state.
 

@@ -5,10 +5,14 @@
   "types": "lib/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc --build --watch",
-    "compile": "tsc --build"
+    "clean": "rimraf ./lib",
+    "dev": "rimraf ./lib && tsc --build --watch",
+    "compile": "rimraf ./lib && tsc --build"
   },
   "dependencies": {
     "mongoose": "^6.7.0"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }

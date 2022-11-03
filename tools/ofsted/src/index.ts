@@ -1,107 +1,75 @@
-import * as path from "path";
-import * as fs from "fs";
+import { pipeline } from "stream/promises";
+import config from "./config";
 
+import { childcare } from "./readers/childcare";
+import { coordinates } from "./transformers/coordinates";
 import {
-  getPostcodeLookup,
-  getChildcareInformation,
-  getSchoolInformation,
-  getCensus,
-  getFinancials,
-  getTeacherInformation,
-  getLocalAuthorities,
-  getSchoolType,
-} from "./loaders";
+  // createLocalAuthorityLookupCsv,
+  localAuthorityId,
+} from "./transformers/localAuthorityId";
+import { mongo } from "./writers/mongo";
+import { schoolWriterFunc } from "./writers/school";
+import { createReadStream } from "./readers/createStream";
+import { census } from "./transformers/census";
+import { financials } from "./transformers/financials";
+import { teachers } from "./transformers/teachers";
+import { school } from "./readers/school";
+import { localAuthorityWriterFunc } from "./writers/localAuthority";
+import { localAuthority } from "./readers/localAuthority";
+import { managementinfo } from "./transformers/managementInfo";
 
-import { ISchool } from "./types";
-import { merge } from "./merge";
-import { saveLocalAuthorities, saveSchoolTypes, saveSchools } from "./utils";
+const localAuthorities = async () => {
+  console.log('Processing Local Authorities...');
+  const writer = await mongo(localAuthorityWriterFunc);
 
-const save = async (dir: string, schools: ISchool[]) =>
-  new Promise<void>((resolve) => {
-    const stream = fs.createWriteStream(path.resolve(dir, "school_info.json"));
-    stream.write(JSON.stringify(schools, undefined, 2));
-    resolve();
-  });
+  const input = await createReadStream(config.localAuthoritiesFileName);
 
+  await pipeline(input, localAuthority, writer);
 
+  await writer.disconnect();
+};
 
-// const printUnique = (a: any[]) => {
-//   const unique = [...new Set(a)].sort();
-//   console.table(unique);
-// };
+const schools = async () => {
+  const schoolWriter = await mongo(schoolWriterFunc);
+
+  const managementInfo = await managementinfo();
+  const geolocation = await coordinates();
+  const cen = await census();
+  const fin = await financials();
+  const teach = await teachers();
+
+  console.log('Processing Schools...');
+  const schoolInput = await createReadStream(config.schoolFileName);
+  
+  await pipeline(schoolInput, school, geolocation, managementInfo, cen, fin, teach, schoolWriter);
+
+  await schoolWriter.disconnect();
+}
+
+const childcareSchools = async () => {
+
+  const la = await localAuthorityId();
+  const geolocation = await coordinates();
+
+  const schoolWriter = await mongo(schoolWriterFunc);
+  
+  console.log('Processing Childcare...');
+  const childcareInput = await createReadStream(config.childcareFileName);
+
+  await pipeline(childcareInput, childcare, geolocation, la, schoolWriter);
+
+  await schoolWriter.disconnect();
+}
 
 async function main() {
-  const dir = path.resolve(__dirname, "..", "..", "..", "data");
-
-  console.log("Getting local authorites...");
-  const localAuthorities = await getLocalAuthorities(dir);
-
-  console.log("Getting school types...");
-  const schoolTypes = await getSchoolType(dir);
-
-  console.log("Getting postcodes...");
-  const postcodes = await getPostcodeLookup(dir);
-
-  console.log("Getting childcare...");
-  const childcare = await getChildcareInformation(
-    dir,
-    postcodes,
-    localAuthorities
-  );
-  console.log("Getting schools...");
-  const schools = await getSchoolInformation(dir, postcodes);
-  console.log("Getting census...");
-  const census = await getCensus(dir);
-  console.log("Getting financials...");
-  const financials = await getFinancials(dir);
-  console.log("Getting teachers...");
-  const teachers = await getTeacherInformation(dir);
-
-  const dates = [...childcare, ...schools].map(({dateOfLastInspection}) => dateOfLastInspection).filter((d) => d === NaN);
-  console.table(dates);
-
-  console.log("Merging...");
-  const merged = merge(childcare, schools, census, financials, teachers);
-
-  const all = [...merged.filter(({ isOpen }) => isOpen)];
-  all.reduce((prev, { urn, localAuthority: localAuthortiy }) => {
-    const key = `${urn}-${localAuthortiy}`;
-    if (prev.includes(key)) {
-      console.warn(`DUPLICATE URN DETECTED: ${urn} in ${localAuthortiy}`);
-    } else {
-      prev.push(key);
-    }
-    return prev;
-  }, new Array<string>());
-
-  const allIds = [
-    ...childcare.map(({ id }) => id),
-    ...schools.map(({ id }) => id),
-  ];
-  allIds.reduce((prev, cur) => {
-    if (prev.includes(cur)) {
-      console.warn(`DUPLICATE KEY DETECTED: ${cur}`);
-    } else {
-      prev.push(cur);
-    }
-    return prev;
-  }, new Array<string>());
-
-  console.log("Saving...");
-
-  // const allValues = all.map(
-  //   ({ religiousCharacter }) => religiousCharacter ?? ""
-  // );
-  // printUnique(allValues);
-
+  // await createLocalAuthorityLookupCsv();
   
+  await localAuthorities();
 
-  await save(dir, all);
+  await childcareSchools();
 
-  await saveLocalAuthorities(localAuthorities);
-  await saveSchoolTypes(schoolTypes);
+  await schools();
 
-  await saveSchools(all);
 }
 
 main();
